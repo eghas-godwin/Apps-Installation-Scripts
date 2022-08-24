@@ -1,7 +1,7 @@
 #!/bin/bash
 ## Use this script to create a new directory to be used as a new repository.
-mkdir projectname
-cd projectname
+mkdir dirNname
+cd dirName
 
 
 ## It initializes the repository and configures it.
