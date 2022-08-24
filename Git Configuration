@@ -1,0 +1,24 @@
+#!/bin/bash
+# Use this script to create a new directory to be used as a new repository.
+# It initializes the repository and configures it.
+# It can create files, stage and commit.
+# It can create repository branches.
+# It adds your remote repository and push.
+mkdir projectname
+cd projectname
+git init
+git config --global user.name username
+git config --global user.email useremail
+git config --global color.ui auto
+git config --global init.defaultBranch master
+git remote add pt https-ripository-link
+touch main-file
+touch main-file0
+echo "This is a pratice" >> main-file1
+git branch development
+git branch stage
+git add .
+git commit -m "add main-file and main-file1"
+git config pull.rebase true
+git pull pt master
+git push pt master
