@@ -21,3 +21,56 @@ git branch branchName
 # It adds your remote repository and push.
 git remote add pt https-ripository-link
 git pull aliasName branchName
+
+# for new projects, create a git local repository
+mkdir demo-git
+cd demo-git
+git init .
+# demo-git will be created as a local repository.
+
+git status   # check status
+  To stage and unstage
+git add file-name
+git add .
+git add -A
+git rm -r --cached file-name
+git rm -r --cached .
+      To commit
+ git commit -m "bootstrap project"
+git commit --amend -m "amended project name or comment"
+     To check your commit
+git log
+     To check actual commit
+git show  then paste the hash
+  
+To check a modifiled file
+git diff branch-Name
+To add remote repository 
+git remote add username user-url
+Or
+git remote add aliasname repo-url
+To verify your added remote repository 
+git remote -v
+To push to remote repository 
+git push aliasname master
+Put in your username
+For password: put your generated token
+To Pull
+git pull
+git config pull.rebase true
+git branch                   *To check your current working branch
+git branch -r               *To list all the local branches
+git branch -a             *To list all the branches both local and remote
+git branch file-name           *To create a new branch
+git checkout file-name       *To switch to the branch called file-name
+git checkout -b file-name      * To create a new branch and switch to the branch created
+git checkout -       *To switch back to your previous branch
+git branch -d file-name     *To delete a branch
+To merge many commit into one commit in master
+git merge branch-name
+To merge many commit into many commit in master
+git rebase
+To merge a selected commit into master
+git cherry-pick  commit-id or cid or hash number
+To copy or duplicate the full content of remote repo to your local repo
+git clone repo-link
