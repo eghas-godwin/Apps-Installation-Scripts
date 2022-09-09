@@ -28,5 +28,5 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 =========================================================================
 # create a nexus repository in nexus server using nexus gui
 # madify the DistributionManagement tag in pom.xml
-#add nexus user and password in jenkins server by
+#add nexus user and password in jenkins server under server tag <server> in settings.xml
 sudo vi /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven/conf/settings.xml
