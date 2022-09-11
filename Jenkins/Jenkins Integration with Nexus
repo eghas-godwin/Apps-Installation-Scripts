@@ -1,0 +1,16 @@
+# Access Jenkins from the browser by using 
+public-ip:8080
+
+# Command to get public-ip is 
+curl ifconfig.co 
+
+# get jenkins initial admin password
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+#Jenkins integration with nexus
+=========================================================================
+# create a nexus repository in nexus server using nexus gui
+# madify the DistributionManagement tag in pom.xml
+#add nexus user and password in jenkins server under server tag <server> in settings.xml
+sudo vi /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven/conf/settings.xml
