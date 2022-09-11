@@ -1,0 +1,12 @@
+Jenkins SonarQube Integration;  mvn sonar:sonar :
+  1. modify 'Properties' tag with SonarQube server details in  pom.xml
+    vi pom.xml:
+      <Property>
+        <sonar.host.url>http://3.83.86.27:9000/</sonar.host.url>
+    <sonar.login>class28</sonar.login>
+    <sonar.password>admin</sonar.password>
+      </Property>
+ 2. Open required ports (9000) in SonarQube server 
+    to allow traffic from jenkins server
+ 
+    or Install and configure JaCoCo plugin in Jenkins UI
