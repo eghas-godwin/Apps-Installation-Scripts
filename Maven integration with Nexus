@@ -1,0 +1,7 @@
+#Maven integration with nexus
+#Using nexus as actifactory by maven
+=========================================================================
+# create a nexus repository in nexus server using nexus gui
+# madify the DistributionManagement tag in pom.xml
+#add nexus user and password in maven server under server tag <server> in settings.xml
+sudo vi /opt/maven/conf/settings.xml
