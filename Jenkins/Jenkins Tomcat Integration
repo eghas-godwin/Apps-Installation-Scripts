@@ -1,0 +1,15 @@
+JENKINS-TOMCAT INTEGRATION:
+============================= 
+1. INSTALL 'Deploy to container' Plugin on Jenkins UI
+       JENKINS uses plugin to extend it functionality
+
+2. ADD A TOMCAT USER in /tomcat9/conf/tomcat-users.xml in tomcat server
+   vi /tomcat9/conf/tomcat-users.xml 
+   mylandmark landmark 
+
+<user username="landmark" password="admin123" roles="manager-gui,admin-gui,manager-script"/>  
+<user username="LandmarkTechology" password="admin123" roles="manager-gui,admin-gui"/>
+
+3. configure jenkins with tomcat credentials
+tomcat username xxxxx
+tomcat password xxxxx
