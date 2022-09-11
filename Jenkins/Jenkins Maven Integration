@@ -1,0 +1,8 @@
+2. Jenkins-Maven integration: clean install 
+    1. go to  Manage Jenkins
+       go to Global Tool Configuration
+           maven3.8.4 
+
+         choose maven version  maven  
+
+    2. Build and invoke top maven target 
