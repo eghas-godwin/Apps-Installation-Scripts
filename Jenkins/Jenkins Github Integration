@@ -1,0 +1,11 @@
+1. Jenkins-Git/Github Integration:
+  1. INSTALL GIT in Jenkins server or 
+        Configure git plugin in Jenkins
+
+  2. Create credentials to access code in Guthub
+     Jenkins should be authorised to clone/pull code 
+     from  REPOSITORIES in SCM [GitHub/GitLab/BitBucket]
+    
+    Configure Github credentials in jenkins [userName & password/token]
+          userName: LEGAH2045 
+          Password/PAT : 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
