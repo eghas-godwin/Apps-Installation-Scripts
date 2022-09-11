@@ -1,0 +1,15 @@
+SETTING UP A PROXY REPOSITORY FOR MAVEN USING NEXUS
+
+create a maven proxy repsitory in nexus
+copy the repositorl url or link
+modify /maven/conf/setting.xml
+vi /opt/maven/conf/setting.xml
+modify the mirror tag which is <mirrors> with your nexus details
+
+<mirror>
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://3.80.84.157:8081/repository/maven-proxy-repository/</url>
+</mirror>
+
+comment on any other details if present within the mirror tag
