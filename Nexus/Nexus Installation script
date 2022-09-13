@@ -1,3 +1,11 @@
+AWS Acccount.
+Create Redhat EC2 t2.medium Instance with 4GB RAM.
+Create Security Group and open Required ports.
+8081 ..etc
+Attach Security Group to EC2 Instance.
+Install java openJDK 1.8+ for Nexus version 3.15
+
+
 Script 1
 ==============================================================
 sudo useradd nexus
