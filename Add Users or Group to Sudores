@@ -5,3 +5,7 @@ sudo echo "username ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
 sudo echo "groupname ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/groupname
 #    OR
 vi /etc/sudoers
+
+ADD USERS AND CREAT PASSWORD FOR USERS
+sudo useradd username
+sudo passwd username
