@@ -1,11 +1,15 @@
+Script 1
+======================================================================
 sudo useradd sonar
 sudo echo "sonar ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/sonar
 sudo passwd sonar
 sudo su - sonar
 sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo service sshd restart
-#Please cd into /opt before running this script because cd /opt command may not function
-#cd /opt
+
+Script 2
+=========================================================================
+cd /opt
 sudo yum -y install unzip wget git
 sudo yum install jdk-8u131-linux-x64.rpm -y
 sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-7.8.zip
