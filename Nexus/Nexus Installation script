@@ -3,9 +3,10 @@ Script 1
 sudo useradd nexus
 sudo echo "nexus ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/nexus
 sudo passwd nexus
-sudo su - nexus
 sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo service sshd restart
+sudo systemctl restart sshd
+sudo su - nexus
 
 Script 2
 ================================================================
