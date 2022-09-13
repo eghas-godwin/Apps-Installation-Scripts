@@ -1,0 +1,23 @@
+# Add Users or Group to Sudores file
+# Add User to Sudores file
+sudo echo "username ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
+# Add Group to Sudores file
+sudo echo "groupname ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/groupname
+#    OR
+vi /etc/sudoers
+
+ADD USERS AND CREAT PASSWORD FOR USERS
+sudo useradd username
+sudo passwd username
+
+how to enable PasswordAuthentication in aws ec2 Linux instances??
+1. sudo vi /etc/ssh/sshd_config  
+   change PasswordAuthentication from "no" to "yes"
+2. restart your ssh service  
+   sudo systemctl restart sshd 
+   
+   or
+   
+sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+sudo service sshd restart
+sudo systemctl restart sshd  
