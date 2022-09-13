@@ -1,3 +1,4 @@
+
 # Add Users or Group to Sudores file
 # Add User to Sudores file
 sudo echo "username ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
