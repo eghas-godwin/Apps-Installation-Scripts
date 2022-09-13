@@ -1,0 +1,6 @@
+timedatectl list-timezones
+# Once you identify which time zone is accurate to your location, run the following command as root or sudo user:
+sudo timedatectl set-timezone <your_time_zone>
+
+example
+sudo timedatectl set-timezone America/Los_Angeles
