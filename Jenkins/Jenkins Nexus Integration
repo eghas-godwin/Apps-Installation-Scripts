@@ -1,12 +1,3 @@
-# Access Jenkins from the browser by using 
-public-ip:8080
-
-# Command to get public-ip is 
-curl ifconfig.co 
-
-# get jenkins initial admin password
-sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
 
 #Jenkins integration with nexus
 =========================================================================
