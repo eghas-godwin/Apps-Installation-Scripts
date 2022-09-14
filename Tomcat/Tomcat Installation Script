@@ -1,6 +1,32 @@
-sudo useradd sonar
-sudo passwd sonar
-sudo echo "sonar ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/sonar
+Script 1
+================================================================
+sudo useradd tomcat
+sudo passwd tomcat
+sudo echo "tomcat ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/tomcat
 sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo service sshd restart
 sudo systemctl restart sshd
+sudo su - tomcat
+
+
+Script 2
+==================================================================
+sudo rm -rf /opt/tomcat9
+cd /opt 
+sudo yum -y install git wget unzip vim
+sudo yum install java-1.8.0-openjdk-devel -y
+sudo wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.64/bin/apache-tomcat-9.0.64.tar.gz
+sudo tar -xvf apache-tomcat-9.0.64.tar.gz
+sudo rm apache-tomcat-9.0.64.tar.gz
+sudo mv apache-tomcat-9.0.64 tomcat9
+sudo chmod 777 -R /opt/tomcat9
+sudo chown tomcat -R /opt/tomcat9
+sh /opt/tomcat9/bin/startup.sh
+sudo ln -s /opt/tomcat9/bin/startup.sh /usr/bin/starttomcat
+sudo ln -s /opt/tomcat9/bin/shutdown.sh /usr/bin/stoptomcat
+sudo yum update -y
+starttomcat
+========================================================================
+#echo "end of tomcat installation"
+========================================================================
+
