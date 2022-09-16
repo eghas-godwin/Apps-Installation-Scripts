@@ -1,0 +1,20 @@
+pipeline {
+        agent any
+        tools {
+            maven "maven3.8.6"
+        }
+        stages {
+            stage('1cloning') {
+                steps {
+                    sh "echo 'Apps latest version committed'"
+                    git "https://github.com/eghas-godwin/maven-web-application.git"
+                }
+            }
+            stage('2Test&build') {
+                steps {
+                    sh "mvn clean install"
+
+                }
+            }
+        }
+    }
