@@ -2,9 +2,9 @@ node {
     stage('1cloning') {
         git 'https://github.com/eghas-godwin/nodejs-application.git'
     }
-    stage('2unittest') {
+   /* stage('2unittest') {
         sh 'npm test'
-    }
+    } */
     stage('3Build') {
         sh 'npm install'
     }
