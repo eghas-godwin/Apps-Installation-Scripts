@@ -1,3 +1,7 @@
+//This Script should be peasted in your project pipeline script space provided in your project configuration tab
+//This Script should be used after setting up your shared library in jenkins Global Pipeline Libraries found in 
+//Jenkins configuration system
+
 @Library('ntech-shared-lib') _
 pipeline {
     agent any
