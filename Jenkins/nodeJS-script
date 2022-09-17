@@ -1,32 +1,19 @@
 node {
-    stage('1cloning') {
+    stage('1. Cloning') {
         git 'https://github.com/eghas-godwin/nodejs-application.git'
     }
-   /* stage('2unittest') {
-        sh 'npm test'
-    } */
-    stage('3Build') {
-        sh 'npm install'
+    stage('2. Unit Test') {
+        //sh 'npm test'
     }
-    //stage('1cloning') {}
-}
-
-=====================================================
-OR
-=====================================================
-
-node {
-    stage('1cloning') {
-        git 'https://github.com/eghas-godwin/nodejs-application.git'
-    }
-    stage('2unittest') {
-        sh 'npm test'
-    }
-    stage('3Build') {
+    stage('3. Build') {
         //sh 'npm install'
+        //OR
         nodejs('NodeJS18.9.0') {
             sh 'npm install'
         }
     }
-    //stage('1cloning') {}
+    stage('4. Code Quality') {
+        sh 'npm run sonar'
+    }
+    stage('5. Upload To Nexus') {}
 }
