@@ -11,5 +11,10 @@ pipeline {
                 git 'https://github.com/eghas-godwin/maven-web-apps.git'
             }
         }
+        stage('Build') {
+            steps {
+                common('Build')
+            }
+        }
     }
 }
