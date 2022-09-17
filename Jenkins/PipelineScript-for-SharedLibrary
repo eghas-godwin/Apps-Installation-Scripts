@@ -1,0 +1,15 @@
+@Library('Ntech-Jenkinssharedlibs') 
+pipeline{
+    agent any
+    tools {
+        maven "maven3.8.6"
+    }
+    stages {
+        stage('gitpull') {
+            steps {
+                sh "echo start of project"
+                git https://github.com/eghas-godwin/JenkinsSharedLibraries.git
+            }
+        }
+    }
+}
