@@ -7,13 +7,19 @@ node {
     }
     stage('3. Build') {
         //sh 'npm install'
-        //OR
         nodejs('NodeJS18.9.0') {
             sh 'npm install'
         }
     }
     stage('4. Code Quality') {
-        sh 'npm run sonar'
+        //sh 'npm run sonar'
     }
-    stage('5. Upload To Nexus') {}
+    stage('5. Upload To Nexus') {
+        sh 'npm publish'
+        //Jenkins nexus Intergration
+        // password = admin123 username = admin
+        // run below command in any linux cli to encript your password
+        // echo -n 'admin:passw0rd' | openssl base64
+        // copy your encripted details and place it in .npmrc file
+    }
 }
