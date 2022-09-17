@@ -1,4 +1,4 @@
-@Library('Ntech-Jenkinssharedlibs') _
+@Library('ntech-shared-lib') _
 pipeline {
     agent any
     tools {
@@ -8,7 +8,7 @@ pipeline {
         stage('gitpull') {
             steps {
                 sh "'echo start of project"
-                git 'https://github.com/eghas-godwin/JenkinsSharedLibraries.git'
+                git 'https://github.com/eghas-godwin/maven-web-apps.git'
             }
         }
     }
