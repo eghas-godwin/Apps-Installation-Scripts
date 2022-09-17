@@ -20,5 +20,15 @@ pipeline {
                 common('Build')
             }
         }
+        stage('Code Quality') {
+            steps {
+            common('SonarQube Report')
+            }
+        }
+        stage('Upload Artifacts') {
+            steps {
+                common('Upload Into Nexus')
+            }
+        }
     }
 }
