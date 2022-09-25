@@ -1,0 +1,32 @@
+node {
+    def  MHD = tool 'maven3.8.6'
+    stage('1. Clone') {
+        git credentialsId: 'GitHub', url: 'https://github.com/eghas-godwin/paypal-web-app.git'
+        // MHD = tool 'maven3.8.6'
+    }
+    stage('2. Test & Build'){
+        sh "${MHD}/bin/mvn clean package"
+    }
+    stage('3. Code Quality Check'){
+        sh "${MHD}/bin/mvn sonar:sonar"
+    }
+    stage('4. Artifacts Uploads'){
+        sh "${MHD}/bin/mvn deploy"
+    }
+    stage('5. Deploy To UAT'){
+        deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://54.183.139.51:8080/')], contextPath: null, war: 'target/*.war'
+    }
+    stage('6. Approval Gate'){
+        timeout(activity: true, time: 5) {
+     echo 'Application ready for deployment, Please review and approve'
+    input 'Application ready for deployment, Please review and approve'
+}
+    }
+    stage('7. Delopy To Production'){
+        deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://54.183.139.51:8080/')], contextPath: null, war: 'target/*.war'
+    }
+    stage('7. Notification'){
+        mail bcc: '', body: '''Please verify
+Ntech Multiserve Ltd''', cc: '', charset: 'Hello Engineers', from: 'ntechnigeria@gmail.com', replyTo: 'eghas_godwin@yahoo.com', subject: 'Jenkins Project', to: 'eghas_godwin@yahoo.com' 
+    }
+}
