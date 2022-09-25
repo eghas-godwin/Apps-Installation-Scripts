@@ -4,33 +4,47 @@ pipeline {
         maven "maven3.8.6"
     }
     stages {
-        stage('1cloning') {
+        stage('1. Cloning') {
             steps {
                 sh "echo 'Apps latest version committed'"
                 git "https://github.com/eghas-godwin/maven-web-application.git"
             }
         }
-        stage('2Test&build') {
+        stage('2. Test & Build') {
             steps {
                 sh "mvn clean install"
             }
         }
-        stage('3CodeQuality') {
+        stage('3. Code Quality Analysis') {
             steps {
                 sh "mvn sonar:sonar"
             }
         }
-        stage('4UploadtoNexus') {
+        stage('4. Uploading Artifacts') {
             steps {
                 sh "mvn deploy"
             }
         }
-        stage('5DeploytoTomcat') {
+        stage('5. Deployment to UAT') {
             steps {
                 sh "echo 'Ready for deployment'"
+                sh "echo 'Deploying to UAT'"
                 //use pipeline Syntax generator for below command
-                deploy adapters: [tomcat9(credentialsId: 'tomcatcredentials', path: '', url: 'http://54.243.23.121:8181/')], contextPath: null, onFailure: false, war: 'target/*war'
+                deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://54.183.139.51:8080/')], contextPath: null, war: 'target/*.war'
             }
+    }
+    stage('6. Approval Gate') {
+        steps {
+            timeout(activity: true, time: 5) {
+     echo 'Application ready for deployment, Please review and approve'
+    input 'Application ready for deployment, Please review and approve'
+}
+        }
+    }
+    stage('7. Deployment To Production'){
+        steps {
+            deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://54.183.139.51:8080/')], contextPath: null, war: 'target/*.war'
+        }
     }
 
 }
