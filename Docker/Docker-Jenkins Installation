@@ -1,0 +1,38 @@
+#!/bin/bash
+# This Script is for Ubuntu 18.04
+#Script 1
+sudo hostname docker
+sudo apt update -y 
+sudo apt install docker.io -y
+sudo usermod -aG docker ubuntu 
+sudo su - ubuntu
+
+#Script 2
+sudo apt install wget -y
+sudo apt install unzip -y
+sudo apt install tree -y
+sudo apt install git -y
+sudo apt install vim -y
+sudo apt update -y
+sudo apt install default-jdk -y
+java -version
+#sudo apt install java-11-openjdk -y
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update -y
+sudo apt install jenkins -y
+sudo systemctl daemon-reload
+sudo service daemon-reload
+#sudo service enable jenkins
+#sudo service start jenkins
+#sudo service enable jenkins
+#sudo service status jenkins
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+sudo echo "jenkins ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/jenkins
+sudo echo "jenkins:admin" | chpasswd
+sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
+#sudo service sshd restart
+sudo systemctl restart sshd
+sudo usermod -aG docker jenkins
