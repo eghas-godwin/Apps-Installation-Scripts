@@ -1,0 +1,6 @@
+# use this script to produce SonarQube Container in Docker
+# Docker will run SonarQube as a container
+# docker run --name <container name> -d -p <new port number to access sonarqube:default sonarqube port number which is 9000> sonarqube 
+# The last sonarqube in the command is know as sonarqube image own by sonarqube community
+# docker run --name <container name> -d -p access port number:default sonarqube port number which is 9000 sonarqube
+docker run --name sonar -d -p 9010:9000 sonarqube
