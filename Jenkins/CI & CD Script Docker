@@ -43,7 +43,8 @@ pipeline {
         }
         stage("6. Deployment to UAT Enviroment") {
             steps {
-                sh "application is now ready for deployment to UAT"
+                sh "echo 'application is now ready for deployment to UAT'"
+                sh "docker rm -f zulu-uat"
                 sh "docker run --name zulu-uat -d -p 1990:8080 eghasgodwin/zulu:1"
                 sh "echo 'Container created and application running at port 1990'"
             }
@@ -58,7 +59,8 @@ pipeline {
         }
         stage('7. Deployment To Production Enviroment'){
             steps {
-                sh "application deployment to production"
+                sh "echo 'application deployment to production'"
+                sh "docker rm -f zulu-prod"
                 sh "docker run --name zulu-prod -d -p 1991:8080 eghasgodwin/zulu:1"
                 sh "echo 'Container created and application running at port 1991'"
             }
