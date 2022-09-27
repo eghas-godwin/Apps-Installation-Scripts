@@ -1,0 +1,18 @@
+sudo apt install wget -y
+sudo apt install unzip -y
+sudo apt install tree -y
+sudo apt install git -y
+sudo apt install vim -y
+sudo apt update -y
+java -version
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update -y
+sudo apt upgrade -y
+sudo apt install default-jdk -y
+sudo apt install jenkins -y
+sudo apt update -y
+sudo systemctl daemon-reload
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
