@@ -1,0 +1,213 @@
+// 100.24.52.91:8080 
+ //Declarative
+https://github.com/LandmakTechnology/maven-web-application
+pipeline{
+  agent any
+  tools {
+    maven "maven3.8.4"
+  }
+  stages{
+    stage('GitClone'){
+      steps{
+        sh  "echo cloning the latest applications version"
+        git "https://github.com/LandmakTechnology/maven-web-application"
+      }
+    }
+    stage('TestBuild'){
+      steps{
+        sh  "echo Running unitTesting"
+        sh  "echo unitTesting ok. Creating packages"
+        sh  "mvn clean package"
+        sh  "echo Artifacts created"    
+      }
+
+    }
+    stage('codeQality'){
+        steps{
+        sh  "echo Running codeQality report"
+        sh  "docker run -d -p "
+        sh  "mvn sonar:sonar"  
+      }
+    }
+    stage('upLoadArtifacts'){
+        steps{
+        sh  "echo upLoadArtifacts into nexus"
+        sh  "mvn deploy"  
+      }      
+    }
+    stage('message'){
+      steps{
+        sh "echo CI job successful"
+      }
+    }
+    stages{
+      stage('predeployment'){
+        steps{
+          sh "docker build -t mylandmarktech/maven-web-app . "
+          //sh "docker login -u mylandmarktech"
+          sh "docker push mylandmarktech/maven-web-app"
+        }
+      }    
+  }
+}
+
+==================================
+pipeline{
+  agent any 
+  tools{
+    maven "maven3.8.4"
+  }
+  stages{
+    stage('GitClone'){
+      steps{
+        echo "cloning the lastest applications version"
+        git "https://github.com/LandmakTechnology/maven-web-application"
+      }
+    }
+      stage('Test+Build'){
+      steps{
+        sh "echo Running unitTesting"
+        sh "mvn clean package"
+        echo "echo test successful and backupArtifacts created"
+      }
+    }
+      stage('codeQuality'){
+      steps{
+        sh "echo Running detail code analysis"
+        sh "mvn sonar:sonar"
+        sh  "echo All conditions met/passed"
+      }
+    }
+      stage('upLoadArtifacts'){
+      steps{
+        sh "echo Running detail code analysis"
+        sh "mvn deploy"
+        sh "echo backupArtifacts in nexus"
+      }
+    }
+      stage('predeployment'){
+      steps{
+        sh "echo creating docker image"
+        sh "docker build -t mylandmarktech/class26-web-app . "
+        sh "docker push mylandmarktech/class26-web-app"
+      }
+    }
+ 
+  }
+}
+====================
+pipeline{
+  agent any 
+  stages{
+    stage('UnDeploy'){
+      steps{
+        sh "echo UNDEPLOYING existing application"
+        sh "docker rm -f maven-webapp"
+      }
+    }
+    stage('deployment'){
+      steps{
+        sh "echo application ready for deployment"
+        sh "docker run -d -p 8000:8080 --name maven-webapp mylandmarktech/maven-web-app"
+      }
+    }
+  stage('emailNotification'){
+    steps{
+      sh "echo deployment successful"
+    }
+  }
+
+}
+}
+
+
+
+==================================
+
+
+2. Continous deployment job:
+    deploy_to_docker 
+
+  pipeline{
+    agent any 
+      stage('deployment'){
+        steps{
+          sh "sleep 20"
+          sh "application is now ready for deployment"
+          sh "docker run --name myapp -d -p 8000:8080 mylandmarktech/maven-web-app"
+        }
+      }
+      }
+    }
+  
+
+
+
+
+
+
+
+
+
+pipeline{
+  agent any 
+  tools{
+    maven "maven"
+  }
+  stages{
+    stage('NewVersion'){
+      steps{
+        echo "cloning the lastest applications version"
+        git "https://github.com/LandmakTechnology/maven-web-application"
+      
+      }
+    }
+      stage('Test+Build'){
+      steps{
+        sh "echo Running unitTesting"
+        sh "mvn clean package"
+        echo "echo test successful and backupArtifacts created"
+
+      }
+    }
+      stage('codeQality'){
+      steps{
+        sh "echo Running detail code analysis"
+        sh "mvn sonar:sonar"
+        sh  "echo All conditions met/passed"
+      }
+    }
+      stage('upLoadArtifacts'){
+      steps{
+        sh "echo Running detail code analysis"
+        sh "mvn deploy"
+        sh "echo backupArtifacts in nexus"
+      }
+    }
+      stage('predeployment'){
+      steps{
+        sh "echo creating docker image"
+        sh "docker build -t mylandmarktech/maven-web-app:9 . "
+        sh "docker push mylandmarktech/class26-web-app"
+      }
+    }
+      stage('deployment'){
+      steps{
+        sh "echo deploying applications"
+        sh "docker run -d -p 3000:8080 --name app11 mylandmarktech/class26-web-app . "
+      }
+    }    
+  }
+}
+
+pipeline{
+  agent any 
+  stages{
+    stage('deployment'){
+      steps{
+        sh "echo deployment job"
+        sh "sh "docker run -d -p 2000:8080 --name webapp mylandmarktech/class26-web-app "
+      }
+    }
+  }
+}
