@@ -36,3 +36,5 @@ sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication
 #sudo service sshd restart
 sudo systemctl restart sshd
 sudo usermod -aG docker jenkins
+#docker got permission denied... unix:///var/run/docker.sock
+sudo chown -R jenkins /var/run/docker.sock
