@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('1. Deployment To Production Enviroment'){
             steps {
-                sh "application deployment to production"
+                sh "echo 'application deployment to production'"
                 sh "docker run --name zulu-prod -d -p 1991:8080 eghasgodwin/zulu:1"
                 sh "echo 'Container created and application running at port 1991'"
             }
