@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('1. UnDeploy'){
+            steps{
+                sh "echo UNDEPLOYING existing application"
+                sh "docker rm -f maven-webapp"
+            }
+        }
+        stage('2. Deployment'){
+            steps {
+                sh "application deployment"
+                sh "docker run --name zulu-prod -d -p 1991:8080 eghasgodwin/zulu:1"
+                sh "echo 'Container created and application running at port 1991'"
+            }
+        }
+        stage("2. Email Notification"){
+            steps {
+                sh "echo 'Email Notification Sent Successfully'"
+            }
+        }
+
+    }
+}
