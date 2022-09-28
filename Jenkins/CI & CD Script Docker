@@ -36,7 +36,7 @@ pipeline {
         stage('5. Pre-deployment') {
             steps {
                 sh "echo 'creating docker image'"
-                sh "docker build -t zulu:1 ."
+                //sh "docker build -t zulu:1 ."
                 sh "docker tag zulu:1 eghasgodwin/zulu:1"
                 sh "docker push eghasgodwin/zulu:1"                
             }
@@ -52,7 +52,7 @@ pipeline {
         stage('6. Approval Gate') {
             steps {
                 timeout(activity: true, time: 5) {
-                echo 'Application ready for deployment to production, Please review and approve'
+                sh "echo 'Application ready for deployment to production, Please review and approve'"
                 input 'Application ready for deployment, Please review and approve'
                 }
             }
