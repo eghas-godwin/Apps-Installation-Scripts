@@ -8,4 +8,4 @@ docker run --name sonar -d -p 9010:9000 sonarqube
 
 #you can either pull before running the container or just run the container, it will auto pull
 #docker pull sonarqube
-#docker run --name sonar -d -p 9010:9000 sonarqube
+#docker run --name sonarque-container -d -p 8084:9000 sonarqube
