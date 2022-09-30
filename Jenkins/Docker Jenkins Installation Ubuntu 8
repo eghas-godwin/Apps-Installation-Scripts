@@ -23,10 +23,10 @@ sudo apt update -y
 sudo apt install jenkins -y
 sudo systemctl daemon-reload
 sudo service daemon-reload
-#sudo service jenkins enable
-#sudo service  jenkins start
-#sudo service  jenkins enable
-#sudo service  jenkins status
+#sudo chkconfig jenkins on
+#sudo service jenkins start
+#sudo chkconfig jenkins on
+#sudo service jenkins status
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
 sudo systemctl status jenkins
