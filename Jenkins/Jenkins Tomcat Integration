@@ -5,10 +5,14 @@ JENKINS-TOMCAT INTEGRATION:
 
 2. ADD A TOMCAT USER in /tomcat9/conf/tomcat-users.xml in tomcat server
    vi /tomcat9/conf/tomcat-users.xml 
-   mylandmark landmark 
 
 <user username="landmark" password="admin123" roles="manager-gui,admin-gui,manager-script"/>  
 <user username="LandmarkTechology" password="admin123" roles="manager-gui,admin-gui"/>
+
+vim /opt/tomcat9/webapps/manager/META-INF/context.xml
+vim /opt/tomcat9/conf/tomcat-users.xml  # to add user
+
+	<user username="landmark" password="admin" roles="manager-gui,admin-gui"/>
 
 3. configure jenkins with tomcat credentials
 tomcat username xxxxx
