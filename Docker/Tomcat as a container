@@ -1,0 +1,6 @@
+# use this script to produce tomcat Container in Docker
+# Docker will run tomcat as a container
+# docker run --name <container name> -d -p <new port number to access tomcat:default tomcat port number which is 8080> tomcat:9.0
+# The tomcat:9.0 in the command is know as tomcat image and version own by tomcat community
+# docker run --name <container name> -d -p access port number:default sonarqube port number which is 8080 sonarqube
+docker run --name tomcat-container -d -p 8085:8080 tomcat:9.0
