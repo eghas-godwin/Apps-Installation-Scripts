@@ -46,6 +46,6 @@ sudo systemctl enable kubelet.service
 # common for master and worker nodes commands ends
 # sudo kubeadm init 
 # worker nodes to join cluster
-kubeadm join 10.0.0.186:6443 --token 7h4dlq.lv10p57kzm3ex2nt \
+sudo kubeadm join 10.0.0.186:6443 --token 7h4dlq.lv10p57kzm3ex2nt \
         --discovery-token-ca-cert-hash sha256:e6f3da11af72bdda0121cf930525b63925e962f62e10df8f0ecc6878d291831f
 
