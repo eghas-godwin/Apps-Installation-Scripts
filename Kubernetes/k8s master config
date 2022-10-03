@@ -1,2 +1,4 @@
-initalize k8s by
-kubeadm init or kubeadm config images pull
+#initalize k8s by
+sudo kubeadm init or kubeadm config images pull
+#for preflight erros you can ignor by below command
+sudo kubeadm init --ignore-preflight-errors=all
