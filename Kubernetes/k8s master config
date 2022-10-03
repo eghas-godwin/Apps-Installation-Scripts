@@ -15,3 +15,8 @@ after initialization run the below commands one after another
  ==========================================================================
  To check your nodes run
  kubectl get node -o wide
+ 
+ install Weave Scope or weave pod network on your Kubernetes cluster run
+# to enable communication within the cluster
+ 
+kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
