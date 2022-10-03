@@ -1,4 +1,7 @@
 #initalize k8s by
 sudo kubeadm init or kubeadm config images pull
 #for preflight erros you can ignor by below command
-sudo kubeadm init --ignore-preflight-errors=all
+1. sudo kubeadm reset
+2. sudo systemctl restart kubelet
+3. sudo kubeadm init
+===============================================================
