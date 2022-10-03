@@ -1,0 +1,2 @@
+initalize k8s by
+kubeadm init or kubeadm config images pull
