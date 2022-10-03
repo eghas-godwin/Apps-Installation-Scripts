@@ -4,4 +4,14 @@ sudo kubeadm init or kubeadm config images pull
 1. sudo kubeadm reset
 2. sudo systemctl restart kubelet
 3. sudo kubeadm init
+4. copy kubeadm join --token to be used for joining worker nodes
 ===============================================================
+after initialization run the below commands one after another
+
+1. mkdir -p $HOME/.kube
+ 2. sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ 3.  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ 
+ ==========================================================================
+ To check your nodes run
+ kubectl get node -o wide
