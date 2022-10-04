@@ -1,0 +1,3 @@
+#Check the location and credentials that kubectl knows about with this command
+kubectl config view
+
