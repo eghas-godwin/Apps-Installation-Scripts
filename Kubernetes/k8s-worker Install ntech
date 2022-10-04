@@ -1,4 +1,4 @@
-sudo hostname master
+sudo hostname node5
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https
 sudo apt install docker.io -y
