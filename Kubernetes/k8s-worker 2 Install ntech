@@ -1,3 +1,5 @@
+#Run as root user only
+sudo -i
 sudo hostname node3
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https
@@ -5,9 +7,7 @@ sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
 sudo apt-get install curl -y
-sudo -i
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
-exit
 sudo chmod 777 /etc/apt/sources.list.d/
 sudo cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
