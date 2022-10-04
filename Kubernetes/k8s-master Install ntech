@@ -42,7 +42,7 @@ you can create a new token by running
 sudo kubeadm token create --print-join-command
 
 
-
+kubeadm init --ignore-preflight-errors=NumCPU
 
 
 ===========================================================
