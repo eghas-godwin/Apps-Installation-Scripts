@@ -1,6 +1,10 @@
 #Run as root user only
-sudo -i
 sudo hostname node3
+sudo -i
+=================================
+you can run the below as a script
+==================================
+
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https
 sudo apt install docker.io -y
