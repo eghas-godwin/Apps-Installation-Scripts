@@ -40,3 +40,37 @@ kubectl get pods --all-namespaces
 ======================================================
 you can create a new token by running
 sudo kubeadm token create --print-join-command
+
+
+
+
+
+===========================================================
+restart kubenetes
+==================================================
+#initalize k8s by
+sudo kubeadm init or kubeadm config images pull
+#for preflight erros you can ignor by below command
+1. sudo kubeadm reset
+2. sudo systemctl restart kubelet
+3. sudo kubeadm init
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+4. copy kubeadm join --token to be used for joining worker nodes
+===============================================================
+after initialization run the below commands one after another
+
+1. mkdir -p $HOME/.kube
+ 2. sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+ 3.  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+ 
+ ==========================================================================
+ To check your nodes run
+ kubectl get node -o wide
+ 
+ install Weave Scope or weave pod network on your Kubernetes cluster run
+# to enable communication within the cluster
