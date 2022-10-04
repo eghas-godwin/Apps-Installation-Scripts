@@ -7,9 +7,9 @@ you can run the below as a script
 
 sudo apt-get update -y
 sudo apt-get install -y apt-transport-https
-#sudo apt install docker.io -y
-#sudo systemctl start docker
-#sudo systemctl enable docker
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
 sudo apt-get install curl -y
 sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
 sudo chmod 777 /etc/apt/sources.list.d/
