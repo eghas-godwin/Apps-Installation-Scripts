@@ -48,6 +48,8 @@ sudo systemctl enable kubelet.service
 # worker nodes to join cluster
 # kubeadm join 10.0.0.242:6443 --token emguk6.q5b3xz965x6v2tld \
 #        --discovery-token-ca-cert-hash sha256:d2ce2d61745882b4ce423114deb699309d3c90462663cf72c76cf8c29913b01b
-kubeadm join 172.31.15.11:6443 --token ylr65l.9qpsm98v04pa56r3 \
-        --discovery-token-ca-cert-hash sha256:25cbb8ac20525fe891001a45a807d02a589f229404671d49819714969d298e4d
+#kubeadm join 172.31.15.11:6443 --token ylr65l.9qpsm98v04pa56r3 \
+  #      --discovery-token-ca-cert-hash sha256:25cbb8ac20525fe891001a45a807d02a589f229404671d49819714969d298e4d
 
+kubeadm join 172.31.15.11:6443 --token ic537l.vwss71f72itxu6fc \
+        --discovery-token-ca-cert-hash sha256:52d1a26216682e30b6b21e99c3ef9dfe0b19cd6f1d0fae3b3f3ed8257124f5c0
