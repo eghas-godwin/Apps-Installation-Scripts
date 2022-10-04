@@ -43,7 +43,7 @@ sudo kubeadm token create --print-join-command
 
 
 kubeadm init --ignore-preflight-errors=NumCPU
-
+sudo kubeadm init --ignore-preflight-errors=all
 
 ===========================================================
 restart kubenetes
