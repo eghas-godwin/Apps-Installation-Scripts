@@ -6,6 +6,7 @@ sudo kubeadm init or kubeadm config images pull
 3. sudo kubeadm init
 or
 sudo kubeadm init --pod-network-cidr 10.0.0.0/16
+cluster-endpoint
 4. copy kubeadm join --token to be used for joining worker nodes
 ===============================================================
 after initialization run the below commands one after another
