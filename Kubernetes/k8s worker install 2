@@ -1,0 +1,52 @@
+#Run as root user only
+sudo -i
+sudo hostname master
+====================================================
+apt-get update -y
+apt-get install -y apt-transport-https
+
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+apt-get update -y
+
+swapoff -a
+sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+apt-get install -y kubelet containerd kubeadm kubectl kubernetes-cni 
+apt-mark hold kubelet containerd kubeadm kubectl kubernetes-cni 
+
+cat <<EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
+modprobe overlay
+modprobe br_netfilter
+
+cat <<EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-iptables  = 1
+net.ipv4.ip_forward                 = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+EOF
+
+sysctl --system
+
+mkdir -p /etc/containerd
+containerd config default | sudo tee /etc/containerd/config.toml
+
+systemctl restart containerd
+systemctl daemon-reload 
+systemctl start kubelet 
+systemctl enable kubelet.service
+
+kubeadm join 172.31.47.228:6443 --token krd6tq.nzkbn68tkmq70g0h \
+        --discovery-token-ca-cert-hash sha256:96ec897d8368a61a3d017085bba90120933d3ca1393ca4ed0144350f9099629c
+
+
+sudo su - ubuntu
+
+#end of Script 1
