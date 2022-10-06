@@ -23,6 +23,10 @@ kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl
 or
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+4. copy kubeadm join --token to be used for joining worker nodes
 ==========================================================================
 Relabel node
 node-role.kubernetes.io/worker=worker
