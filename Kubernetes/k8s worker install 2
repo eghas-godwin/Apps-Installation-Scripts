@@ -1,6 +1,6 @@
 #Run as root user only
-sudo -i
-sudo hostname master
+#sudo -i
+#sudo hostname master
 ====================================================
 apt-get update -y
 apt-get install -y apt-transport-https
