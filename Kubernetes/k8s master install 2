@@ -45,6 +45,8 @@ systemctl enable kubelet.service
 
 kubeadm init
 
+sudo su - ubuntu
+
 #end of Script 1
 ===========================================================================
 #Run the below commands as a normal user
