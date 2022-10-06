@@ -22,3 +22,7 @@ after initialization run the below commands one after another
 kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
 or
 kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+
+==========================================================================
+Relabel node
+node-role.kubernetes.io/worker=worker
