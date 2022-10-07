@@ -45,3 +45,5 @@ sudo systemctl start kubelet
 sudo systemctl enable kubelet.service
 sudo systemctl start kubelet
 # common for master and worker nodes commands ends
+sudo kubeadm join 172.31.36.78:6443 --token t512dq.0qxq7i01b50fphdl \
+        --discovery-token-ca-cert-hash sha256:f6206ad92f9c81af9b6d633170763a0c8b29e8bf5804ff129f683874d4830438
