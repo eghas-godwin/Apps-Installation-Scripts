@@ -1,5 +1,5 @@
 #Run as root user only
-sudo hostname node3
+sudo hostname master
 sudo -i
 =================================
 you can run the below as a script
