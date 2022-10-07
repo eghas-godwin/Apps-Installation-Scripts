@@ -6,6 +6,13 @@ kubectl get pods --all-namespaces
 kubectl get pods 
 kubectl get nodes
 
+kubectl get deploy -o wide -n dep
+kubectl edit deployment webapp -n dep
+kubectl rollout history deployment webapp -n dep
+kubectl rollout undo deploy -n dep
+kubectl rollout undo deploy -n dep --to-revision=2
+kubectl rollout undo deploy/webapp -n dep --to-revision=1
+kubectl get rs -o wide -n dep
 
 
 # Columnar output
