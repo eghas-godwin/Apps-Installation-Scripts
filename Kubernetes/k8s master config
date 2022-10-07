@@ -29,6 +29,8 @@ kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl versio
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
 
+sudo kubectl apply -f https://docs.projectcalico.org/v3.14/manifests/calico.yaml
+
 4. copy kubeadm join --token to be used for joining worker nodes
 ==========================================================================
 Relabel node
