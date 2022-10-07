@@ -36,6 +36,8 @@ sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.10.0/D
 sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/c5d10c8/Documentation/kube-flannel.yml
 
 
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
 
 4. copy kubeadm join --token to be used for joining worker nodes
 ==========================================================================
