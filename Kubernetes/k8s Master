@@ -88,5 +88,5 @@ kubectl get nodes
 #createing a new token
 sudo kubeadm token create --print-join-command
 ==============================================================================
-
-
+#change name space context
+kubectl config set-context --current --namespace=<namespace>kube
