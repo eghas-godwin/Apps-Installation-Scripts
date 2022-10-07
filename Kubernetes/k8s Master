@@ -65,6 +65,8 @@ kubectl get nodes
 
 =================================================================================================
 #Reseting master
+sudo rm -rf $HOME/.kube
+sudo rm -rf /etc/kubernetes/admin.conf
 sudo kubeadm reset
 sudo systemctl restart kubelet
 sudo kubeadm init --pod-network-cidr=10.244.0.0/16
