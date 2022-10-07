@@ -62,3 +62,22 @@ kubectl get pods -o wide -n kube-system
 kubectl get pods --all-namespaces
 kubectl get pods 
 kubectl get nodes
+
+=================================================================================================
+#Reseting master
+sudo kubeadm reset
+sudo systemctl restart kubelet
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+#install and add at least one node before running below commands
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.10.0/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+
+kubectl get pods -o wide -n kube-system
+kubectl get pods --all-namespaces
+kubectl get pods 
+kubectl get nodes
