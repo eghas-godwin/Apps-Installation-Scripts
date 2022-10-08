@@ -14,6 +14,26 @@ kubectl rollout undo deploy -n dep --to-revision=2
 kubectl rollout undo deploy/webapp -n dep --to-revision=1
 kubectl get rs -o wide -n dep
 
+Deploy Sample Application
+==========================
+
+kubectl run nginx-demo --image=nginx --port=80 
+
+kubectl expose deployment nginx-demo --port=80 --type=NodePort
+
+
+Get Node Port details 
+=====================
+kubectl get services
+ 
+ alias k=kubectl
+ k api-resources
+
+# Label node 
+kubectl label node <nodeName>   node-role.kubernetes.io/worker=worker
+
+ alias k=kubectl
+
 
 # Columnar output
 $ kubectl get services                          # List all services in the namespace
