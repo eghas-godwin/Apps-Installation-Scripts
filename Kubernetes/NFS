@@ -39,7 +39,7 @@ sudo vi /etc/exports
 
 /mnt/share/ *(rw,sync,no_subtree_check,no_root_squash)
 
-
+/mnt/share/ 172.31.0.0/16(rw,sync,no_subtree_check,no_root_squash)
 
 
 Step 4: Export the shared directory
