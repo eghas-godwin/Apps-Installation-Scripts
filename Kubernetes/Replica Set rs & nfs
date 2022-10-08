@@ -6,7 +6,6 @@ spec:
   selector:
     matchLabels:
       app: mongodb
-  replicas: 3
   template:
      metadata:
        name: mongodbpod
@@ -16,7 +15,7 @@ spec:
        volumes:
        - name: nfsvol
          nfs:
-           server: 172.31.1.53
+           server: 172.31.83.123
            path: /mnt/share
        containers:
        - name: mongodbcontainer
@@ -43,4 +42,4 @@ spec:
   ports:
   - port: 27017
     targetPort: 27017
-    nodePort:31500
+    nodePort: 31500
