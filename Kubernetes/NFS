@@ -56,7 +56,7 @@ Step 5: Open firewall for the client (s) PORT 2049
 Configuring the Client Machine
 ==========================
 
-Step 1: Install NFS Common
+Step 1: Install NFS Common all master and nodes
 Before installing the NFS Common application, we need to update our system’s repository index with that of the Internet through the following apt command as sudo:
 
 $ sudo apt-get update && sudo apt-get install nfs-common -y
