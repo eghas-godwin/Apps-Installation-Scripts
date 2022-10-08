@@ -20,9 +20,9 @@ spec:
            path: /mnt/share
        containers:
        - name: mongodbcontainer
-         image: mylandmarktech/spring-boot-mongo
+         image: mongo
          ports:
-         - containerPort: 8080
+         - containerPort: 27017
          env:
          - name: MONGO_INITDB_ROOT_USERNAME
            value: devdb
@@ -41,6 +41,6 @@ spec:
   selector:
     app: mongodb  
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: 27017
+    targetPort: 27017
     nodePort:31500
