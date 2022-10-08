@@ -34,11 +34,13 @@ sudo vi /etc/exports
 
 =#/mnt/share/ <clientIP or Clients CIDR>(rw,sync,no_subtree_check,no_root_squash)
  #Ex:
- 
+
+#for every server to rw
 /mnt/share/ *(rw,sync,no_subtree_check,no_root_squash)
 
 /mnt/share/ *(rw,sync,no_subtree_check,no_root_squash)
 
+#for a server in a cidr or vpc to wr
 /mnt/share/ 172.31.0.0/16(rw,sync,no_subtree_check,no_root_squash)
 
 
@@ -78,7 +80,8 @@ sudo vi /etc/exports
 
 =#/mnt/share/ <clientIP or Clients CIDR>(rw,sync,no_subtree_check,no_root_squash)
  #Ex:
- 
+
+#for every server to rw
 /mnt/share/ *(rw,sync,no_subtree_check,no_root_squash)
 =====
 
