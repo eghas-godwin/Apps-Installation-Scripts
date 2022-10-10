@@ -37,5 +37,29 @@ on vscode run aws configure and put your access key credentials
 #Step 3. install Hashicrop plugin on vscode
 goto extention on your vscode and search for terraform
 
+# step 4. create a teraform configuration file e.g ec2.tf and enter below configuration
+====================
+provider "aws" {
+  region  = "us-east-1"
+}
+
+
+resource "aws_instance" "my_demo" {
+  ami           = "ami-06640050dc3f556bb" # us-east-1
+  instance_type = "t2.micro"
+  }
+========================
+
+#step 5. run
+terraform init
+terraform validate
+terraform plan
+terraform apply #use to apply the changes to the state of confihuration
+terraform destory #use to destory terrafory managed infrastructure
+
+#Review terraform manifest for ec2 instance
+
+
+
 
 
