@@ -32,7 +32,7 @@ resource "aws_security_group" "custom_ports" {
   description = "Allow Custom Ports inbound traffic"
   
   dynamic "ingress" {
-    iterator = Port
+    iterator = port
     for_each = var.ingressrules
     content {
         from_port   = port.value
@@ -43,7 +43,7 @@ resource "aws_security_group" "custom_ports" {
   }
 
   dynamic "egress" {
-    iterator = Port
+    iterator = port
     for_each = var.egressrules
     content {
         from_port   = port.value
