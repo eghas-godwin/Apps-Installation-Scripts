@@ -13,13 +13,13 @@ provider "aws" {
 }
 
 resource "aws_instance" "demo-server" {
-  ami = data.aws_ami.redhat.id
+  ami = data.aws_ami.amazon-ec2.id
   associate_public_ip_address = true
   instance_type = var.instance_type
   key_name = var.key_name
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   user_data = file("${path.module}/app-install.sh")
-   tags = {
+  tags = {
     "Name" = "demo-server"
   }
 }
@@ -82,7 +82,7 @@ variable "key_name" {
 ===================================================================
 #Data
 ===================================================================
-data "aws_ami" "redhat" {
+data "aws_ami" "amazon-ec2" {
   most_recent = true
   owners = ["amazon"]
 
