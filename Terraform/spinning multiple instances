@@ -14,9 +14,10 @@ provider "aws" {
   region  = var.region
 }
 
+===============================================================================================================
 #spinning multiple instances with line block
 #Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
-
+================================================================================================================
 resource "aws_instance" "dev_server" {
   ami = data.aws_ami.amazon-ec2.id
   associate_public_ip_address = true
@@ -96,10 +97,10 @@ resource "aws_security_group" "custom_ports" {
 
 
 
-
+=============================================================================================================================
 #spinning multiple instances with mapping block
 #Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
-
+==============================================================================================================================
 resource "aws_instance" "dev_server" {
   #ami = data.aws_ami.amazon-ec2.id
   #associate_public_ip_address = true
