@@ -1,0 +1,91 @@
+variable block for instance
+=============================================================
+terraform {
+  required_version = "~> 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "aws" {
+  region  = var.region
+}
+
+
+resource "aws_instance" "demo_server" {
+  #ami = data.aws_ami.amazon-ec2.id
+  #associate_public_ip_address = true
+  instance_type = var.instance_type
+  #key_name = var.key_name
+  #vpc_security_group_ids = [aws_security_group.allow_tls.id]
+  #user_data = file("${path.module}/app-install.sh")
+  tags = {
+    "Name" = "demo_server"
+  }
+}
+
+variable "instance_type" {
+  description = "The aws instance_type"
+  type        = string
+  default     = "t2.micro"
+}
+
+
+
+=================================================================
+list block for instance
+=================================================================
+#The instance type list starts from 0,1,2,3....
+#From this example 0 = t2.micro, 1 = t2.medium, 2 = t3.large
+
+resource "aws_instance" "dev_server_01" {
+  #ami = data.aws_ami.amazon-ec2.id
+  #associate_public_ip_address = true
+  instance_type = var.instance_type_list[1]
+  #key_name = var.key_name
+  #vpc_security_group_ids = [aws_security_group.custom_ports.name]
+  #user_data = file("${path.module}/app-install.sh")
+  
+  tags = {
+    "Name" = "dev_server_01"
+  }
+}
+ 
+variable "instance_type_list" {
+  description = "The aws instance type"
+  type        = list(string)
+  default     = ["t2.micro", "t2.medium", "t3.large"]
+}
+
+
+
+==========================================================================================
+map block for instance
+==========================================================================================
+
+resource "aws_instance" "dev_server_01" {
+  #ami = data.aws_ami.amazon-ec2.id
+  #associate_public_ip_address = true
+  instance_type = var.instance_type_list[dev]
+  #key_name = var.key_name
+  #vpc_security_group_ids = [aws_security_group.custom_ports.name]
+  #user_data = file("${path.module}/app-install.sh")
+  
+  tags = {
+    "Name" = "dev_server_01"
+  }
+}
+
+variable "instance_type_map" {
+  description = "The aws instance type"
+  type        = map(string)
+  default     = {
+    "dev" = "t2.micro"
+    "qa"  = "t2.medium"
+    "prod" = "t3.large"
+  }
+}
+
