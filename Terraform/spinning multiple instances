@@ -1,4 +1,5 @@
 #spinning multiple instances with mapping block
+#Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
 
 terraform {
   required_version = "~> 1.0"
