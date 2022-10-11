@@ -12,7 +12,7 @@ provider "aws" {
   region  = var.region
 }
 
-resource "aws_instance" "demo-server" {
+resource "aws_instance" "demo_server" {
   ami = data.aws_ami.amazon-ec2.id
   associate_public_ip_address = true
   instance_type = var.instance_type
@@ -20,7 +20,7 @@ resource "aws_instance" "demo-server" {
   vpc_security_group_ids = [aws_security_group.allow_tls.id]
   user_data = file("${path.module}/app-install.sh")
   tags = {
-    "Name" = "demo-server"
+    "Name" = "demo_server"
   }
 }
 
