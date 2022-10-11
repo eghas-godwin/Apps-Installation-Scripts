@@ -32,14 +32,15 @@ resource "aws_instance" "dev_server" {
     "Name" = "dev_server-${count.index}"
   }
 }
- 
+
+=========== 
 variable "instance_type_list" {
   description = "The aws instance type"
   type        = list(string)
   default     = ["t2.micro", "t2.medium", "t3.large"]
 }
 
-
+========
 output "for_output_list_ip" {
     description = "For Loop with list"
     value       = { for instance in aws_instance.dev_server: instance.id => instance.public_ip
@@ -51,7 +52,7 @@ output "for_output_list_dns" {
     value       = { for instance in aws_instance.dev_server: instance.id => instance.public_dns
     }
 }
-
+=========
 
 variable "ingressrules" {
   description = "List of ingress ports"
@@ -115,7 +116,7 @@ resource "aws_instance" "dev_server" {
     "Name" = "dev_server-${count.index}"
   }
 }
- 
+============ 
 variable "instance_type_map" {
   description = "The aws instance type"
   type        = map(string)
@@ -126,7 +127,7 @@ variable "instance_type_map" {
   }
 }
 
-
+=============
 output "for_output_map_ip" {
     description = "For Loop with map"
     value       = { for instance in aws_instance.dev_server: instance.id => instance.public_ip
@@ -138,7 +139,7 @@ output "for_output_map_dns" {
     }
 }
 
-
+==============
 variable "ingressrules" {
   description = "List of ingress ports"
   type        = list(number)
