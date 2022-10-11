@@ -1,0 +1,109 @@
+terraform {
+  required_version = "~> 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "aws" {
+  region  = var.region
+}
+
+resource "aws_instance" "demo-server" {
+  ami = data.aws_ami.redhat.id
+  associate_public_ip_address = true
+  instance_type = var.instance_type
+  key_name = var.key_name
+  vpc_security_group_ids = [aws_security_group.allow_tls.id]
+  user_data = file("${path.module}/app-install.sh")
+   tags = {
+    "Name" = "demo-server"
+  }
+}
+
+===============================================================================
+#Security group
+=================================================================================
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic"
+  #vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description      = "TLS from VPC"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+   }
+
+  tags = {
+    Name = "allow_tls"
+  }
+}
+
+====================================================================
+#Variable
+=====================================================================
+variable "region" {
+  description = "The aws region"
+  type        = string
+  default     = "us-east-1"
+}
+/*
+variable "my_ami" {
+  description = "The aws ami"
+  type        = string
+  default     = "ami-06640050dc3f556bb"
+}
+*/
+variable "instance_type" {
+  description = "The aws instance_type"
+  type        = string
+  default     = "t2.micro"
+}
+
+variable "key_name" {
+  description = "The aws ssh_key"
+  type        = string
+  default     = "awssshkey"
+}
+
+===================================================================
+#Data
+===================================================================
+data "aws_ami" "redhat" {
+  most_recent = true
+  owners = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-gp2"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+
+}
