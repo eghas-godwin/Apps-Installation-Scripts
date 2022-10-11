@@ -1,18 +1,19 @@
 #Dynamic Block
 #This is using variable to achieve Dynamic security
 
-resource "aws_instance" "demo_server" {
-  #ami = data.aws_ami.amazon-ec2.id
-  #associate_public_ip_address = true
-  #instance_type = var.instance_type
-  #key_name = var.key_name
+resource "aws_instance" "dev_server_01" {
+  ami = data.aws_ami.amazon-ec2.id
+  associate_public_ip_address = true
+  instance_type = var.instance_type
+  key_name = var.key_name
   vpc_security_group_ids = [aws_security_group.custom_ports.name]
-  #user_data = file("${path.module}/app-install.sh")
+  user_data = file("${path.module}/app-install.sh")
   
   tags = {
     "Name" = "dev_server_01"
   }
 }
+ 
 =================================================================================
 
 variable "ingressrules" {
