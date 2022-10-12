@@ -15,7 +15,7 @@ provider "aws" {
 }
 
 ===============================================================================================================
-#spinning multiple instances with line block
+#spinning multiple instances with list block
 #Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
 ================================================================================================================
 resource "aws_instance" "dev_server" {
