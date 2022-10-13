@@ -1,0 +1,27 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-east-1"
+}
+
+resource "aws_s3_bucket" "terraform-bucket" {
+  bucket = "my-terraform-state-ntech-bucket"
+  acl = "private"
+
+  versioning {
+    enabled = true
+  }
+
+  tags = {
+    Name        = "My Terraform S3 bucket"
+    Environment = "dev"
+  }
+}
