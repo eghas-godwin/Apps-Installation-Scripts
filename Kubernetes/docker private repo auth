@@ -7,5 +7,3 @@ kubectl create secret docker-registry dockerhubcred \
 #step 2.
 run kubectl get secret
 add the secret to your manifest file in imagePullSecrets:
-
-=========================================================================================================
