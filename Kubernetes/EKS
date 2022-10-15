@@ -1,4 +1,4 @@
-polices to add
+###EKS node polices to add
 AmazonEKSWorkerNodePolicy
 AmazonEKS_CNI_Policy
 AmazonEC2ContainerRegistryReadOnly
