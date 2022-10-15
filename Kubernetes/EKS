@@ -2,3 +2,18 @@
 AmazonEKSWorkerNodePolicy
 AmazonEKS_CNI_Policy
 AmazonEC2ContainerRegistryReadOnly
+
+EKS Using CloudFormation
+install awscli
+install eksctl #installation instructions on aws websit ###  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
+install kubectl #installation instructions on aws websit ###  https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
+aws version
+eksctl version
+kubectl version
+#configure awscli by running
+aws configure  [add your key and secret]
+eksctl create help for commands help
+eksctl create cluster --name sirgeks --region us-east-1 --zones us-east-1a, us-east-1c --nodegroup-name worker-nodes --node-type t2-micro --managed
+ 
+ ##delete cluster
+ eksctl delete cluster --name ntech-eks-cli --region us-east-2
