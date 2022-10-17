@@ -101,13 +101,13 @@ source .bashrc
 #####	kops create cluster --zones us-east-1a,zones us-east-1c --dns private --master-size t2.medium --master-count 1 --node-size t2.micro --node-count=2 ${NAME}
 #####   kops create secret --name ${NAME} sshpublickey admin -i ~/.ssh/id_rsa.pub
 
---networking weave or flannel
+--networking weave or flannel \
 
 kops create cluster \
 --state=${KOPS_STATE_STORE} \
 --node-count=2 \
 --master-size=t3.medium \
---node-size=t2.micro \
+--node-size=t3.medium \
 --zones=us-east-1a \
 --name=${NAME} \
 --dns private \
@@ -128,6 +128,7 @@ kops create cluster \
 9) Create kubernetes cluser
 
 	 kops update cluster ${NAME} --yes
+	 kops rolling-update cluster --cloudonly
 
 10) Validate your cluster(KOPS will take some time to create cluster ,Execute below commond after 3 or 4 mins)
 
