@@ -5,7 +5,9 @@ Setup Kubernetes (K8s) Cluster on AWS Using KOPS
 #!/bin/bash
 #1) Create Ubuntu EC2 instance
 
-#1b) sh sudo adduser kops sudo echo "kops ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/kops sudo su - kops
+#1b) sudo adduser kops
+     sudo echo "kops ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/kops
+     sudo su - kops
 
 
 
