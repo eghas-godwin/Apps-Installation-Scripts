@@ -111,7 +111,6 @@ kops create cluster \
 --zones=us-east-1a \
 --name=${NAME} \
 --dns private \
---networking weave \
 --master-count 1
 
 kops create cluster \
