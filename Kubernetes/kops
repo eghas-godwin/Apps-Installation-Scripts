@@ -107,7 +107,7 @@ kops create cluster \
 --state=${KOPS_STATE_STORE} \
 --node-count=2 \
 --master-size=t3.medium \
---node-size=t3.micro \
+--node-size=t2.micro \
 --zones=us-east-1a \
 --name=${NAME} \
 --dns private \
