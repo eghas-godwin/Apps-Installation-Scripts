@@ -1,0 +1,107 @@
+option 1: 
+ sudo apt install ansible
+ sudo yum install ansible
+ sudo dnf install ansible
+ choco install ansible
+ pip3 install ansible  = pip is a python package manager 
+ 
+   this will install the package [ansible] plus 
+   its dependencies [python] 
+    apt is an ubuntu/debian packake manager 
+
+   what is the dependency for tomcat  = java 
+   what is the dependency for ansible = python  
+
+=#1 Ansible installation in ubuntu using python3-pip
+sudo hostname ansible
+sudo adduser ansible
+sudo passwd ansible
+echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+sudo su - ansible
+sudo apt install python3
+sudo apt update
+sudo apt install python3-pip
+pip3 install ansible --user
+sudo apt update
+sudo apt install sshpass
+sudo mkdir /etc/ansible
+sudo chown -R ansible:ansible /etc/ansible/
+vi  /etc/ansible/ansible.cfg
+vi  /etc/ansible/hosts
+
+Landmark Foundation  = 
+=#2=Ansible installation in ubuntu using apt repo
+#!/bin/bash
+ #Ansible installation in ubuntu
+ sudo adduser ansible
+ echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+ sudo su - ansible
+ sudo apt-add-repository ppa:ansible/ansible  
+ sudo apt install ansible  -y 
+ sudo chown ansible:ansible -R /etc/ansible 
+===============================================
+#3 Ansible installation in redhat using python3-pip
+ sudo adduser ansible
+ sudo hostname ansible 
+ echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
+ sudo su - ansible
+ 
+ #[default]
+#region = us-west-1
+ 
+ 
+# 1)     SSH to Redhat System & Switch to ansible user
+#       sudo su - ansible
+      
+#2)     Install python
+       sudo yum install python3 -y 
+      
+#3)    Update python alaternatives
+       sudo alternatives --set python /usr/bin/python3
+      
+#4)    Verify Python Version
+         python --version
+ 
+#5)    Install PIP
+       sudo yum -y install python3-pip
+      
+#6)    Install ansible using PIP
+       pip3 install ansible --user
+      
+#7)    Verify Ansible version
+       ansible --version
+      
+#8)    Create ansible folder under /etc
+       sudo mkdir /etc/ansible
+       sudo chown -R ansible:ansible /etc/ansible/
+       
+      
+#9)    create ansible.cfg file under /etc/ansible ., and paste complete content from below git link.
+
+      #https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
+      
+      wget  https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg -o /etc/ansible/ansible.cfg
+  
+       # vi  /etc/ansible/ansible.cfg
+
+#10)   Create hosts file under /etc/ansible.
+  #      Sample content can found in below git link.
+   #     https://raw.githubusercontent.com/ansible/ansible/devel/examples/hosts
+ 
+   #     vi  /etc/ansible/hosts
+
+//Optional Step
+11) Install sshpass in Ansible server if you want to cofigure host machines with username and  
+      password.
+
+
+sudo dnf --assumeyes install wget gcc gcc-c++ libgcc ;
+wget http://sourceforge.net/projects/sshpass/files/latest/download -O sshpass.tar.gz  ;
+tar -xvf  *.gz  ;
+cd  ./sshpass*  ;
+./configure    ;
+
+sudo yum groupinstall "Development Tools"
+
+make   all  ;
+sudo make install  ; 
