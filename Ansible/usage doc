@@ -1,0 +1,2 @@
+ansible-doc -l | grep jenkins
+ansible-doc community.general.web_infrastructure.jenkins_script
