@@ -14,39 +14,60 @@ https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 helm
 Hub.helm.sh
 
+=========================================================
+  also install ingress run
+===============================================================
+https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+  
+  helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace prometheus
+  
+#The controller should be configured for exporting metrics. This requires 3 configurations to the controller. These configurations are :
+
+#controller.metrics.enabled=true
+#controller.podAnnotations."prometheus.io/scrape"="true"
+#controller.podAnnotations."prometheus.io/port"="10254"
+run
+helm upgrade ingress-nginx ingress-nginx \
+--repo https://kubernetes.github.io/ingress-nginx \
+--namespace prometheus \
+--set controller.metrics.enabled=true \
+--set-string controller.podAnnotations."prometheus\.io/scrape"="true" \
+--set-string controller.podAnnotations."prometheus\.io/port"="10254"
+
+You can validate that the controller is configured for metrics by looking at the values of the installed release, like this:
+
+helm get values ingress-nginx --namespace prometheus
+You should be able to see the values shown below:
+
+..
+controller:
+  metrics:
+    enabled: true
+    service:
+      annotations:
+        prometheus.io/port: "10254"
+           prometheus.io/scrape: "true"
+
+
+
 ==========================================================
 #Deploy Prometheus, Exporters, Alert Manager & Grafana
 ==========================================================
 https://docs.aws.amazon.com/eks/latest/userguide/prometheus.html
-pls create persistentvolume or edith value.yml file and change
-   1. persistent volume for prometheus-alertmanager = false (line 201)
-   2. persistent volume for prometheus-server = false (line 912)
-   3. atertmanager ingress = true  (line 115) 125 139
-      prometheus-server = true  (line 825)
-      or
-   3. also install ingress
+
   
   
-apiVersion: extensions/v1beta1  # networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-resource-1
-  namespace: prometheus
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: alertmanager.ntech.k8.local
-    http:
-      paths:
-      - backend:
-          serviceName: prometheus-alertmanager
-          servicePort: 80
-  - host: prometheus.ntech.k8.local
-    http:
-      paths: 
-      - backend:
-          serviceName: prometheus-server
-          servicePort: 80
+
+     
+        
+
+
+
 
 1. #Create a namespace in which will deploy Prometheus & it’s components
 kubectl create ns apm
