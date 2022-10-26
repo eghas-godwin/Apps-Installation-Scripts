@@ -17,6 +17,37 @@ Hub.helm.sh
 ==========================================================
 #Deploy Prometheus, Exporters, Alert Manager & Grafana
 ==========================================================
+https://docs.aws.amazon.com/eks/latest/userguide/prometheus.html
+pls create persistentvolume or edith value.yml file and change
+   1. persistent volume for prometheus-alertmanager = false (line 201)
+   2. persistent volume for prometheus-server = false (line 912)
+   3. atertmanager ingress = true  (line 115) 125 139
+      prometheus-server = true  (line 825)
+      or
+   3. also install ingress
+  
+  
+apiVersion: extensions/v1beta1  # networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-resource-1
+  namespace: prometheus
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: alertmanager.ntech.k8.local
+    http:
+      paths:
+      - backend:
+          serviceName: prometheus-alertmanager
+          servicePort: 80
+  - host: prometheus.ntech.k8.local
+    http:
+      paths: 
+      - backend:
+          serviceName: prometheus-server
+          servicePort: 80
+
 1. #Create a namespace in which will deploy Prometheus & it’s components
 kubectl create ns apm
 
