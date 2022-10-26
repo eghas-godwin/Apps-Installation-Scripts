@@ -116,7 +116,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: promethus-alertmanger
+          serviceName: prometheus-alertmanager
           servicePort: 80
   - host: prometheus.ntech.k8.local
     http:
