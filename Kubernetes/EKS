@@ -12,6 +12,7 @@ eksctl version
 kubectl version
 #configure awscli by running
 aws configure  [add your key and secret]
+eksctl --help
 eksctl create help for commands help
 eksctl create cluster --name sirgeks --region us-east-1 --zones us-east-1a, us-east-1c --nodegroup-name worker-nodes --node-type t2-micro --managed
  
