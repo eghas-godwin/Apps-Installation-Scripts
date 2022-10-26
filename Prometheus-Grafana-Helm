@@ -15,7 +15,7 @@ helm
 Hub.helm.sh
 
 =========================================================
-  also install ingress run
+  also install ingress controller run
 ===============================================================
 https://kubernetes.github.io/ingress-nginx/user-guide/monitoring/
 
@@ -70,26 +70,61 @@ kubectl create namespace prometheus
 2. Add the prometheus-community chart repository.
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 
-helm upgrade -i prometheus prometheus-community/prometheus \
+  install persistent volume
+  =============================
+3a. install prometheus with 3a only if you already have persistent volume installed if not run 3b commands
+  helm upgrade -i prometheus prometheus-community/prometheus \
     --namespace prometheus \
     --set alertmanager.persistentVolume.storageClass="gp2",server.persistentVolume.storageClass="gp2"
-
-3. install persistent volume
-or 
+3b. 
 helm repo ls
 helm search repo prometheus
 helm search repo apm | grep prometheus
 
 vi into the value files and make changes
  #To make changes 
-helm show values prometheus/prometheus
+helm show values prometheus-community/prometheus
 #Get prometheus values
-helm show values prometheus/prometheus >> values.yml
+helm show values prometheus-community/prometheus >> values.yml
+sudo vi values.yml  and edith to
+(line 197)
+alertmanager
+persistentVolume: 
+       enable: false
 
-
+(line 912)
+server
+persistentVolume: 
+       enable: false
+       
+helm install prometheus prometheus-community/prometheus -n prometheus -f values.yml
 
 4. Verify that all of the pods in the prometheus namespace are in the READY state.
 kubectl get pods -n prometheus
+
+5. deploy ingress
+
+apiVersion: extensions/v1beta1  # networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-resource-1
+  namespace: prometheus
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: alert.ntech.k8.local
+    http:
+      paths:
+      - backend:
+          serviceName: promethus-alertmanger
+          servicePort: 80
+  - host: prometheus.ntech.k8.local
+    http:
+      paths: 
+      - backend:
+          serviceName: prometheus-server
+          servicePort: 80
+
 
 5. se kubectl to port forward the Prometheus console to your local machine.
 kubectl --namespace=prometheus port-forward deploy/prometheus-server 9090
