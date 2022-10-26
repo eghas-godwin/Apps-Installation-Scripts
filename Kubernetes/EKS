@@ -7,7 +7,7 @@ EKS Using CloudFormation
 install awscli
 install eksctl #installation instructions on aws websit ###  https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 install kubectl #installation instructions on aws websit ###  https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html
-aws version
+aws --version
 eksctl version
 kubectl version
 #configure awscli by running
