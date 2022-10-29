@@ -1,0 +1,51 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+ 
+  backend "s3" {
+    bucket = "my-terraform-state-ntech-bucket"
+    key    = "terraform/terraform.tfstate"
+    #dynamodb_table = "terraform_lock"
+    
+  } 
+}
+
+# Configure the AWS Provider
+provider "aws" {
+  region = "us-east-1"
+ 
+}
+
+
+/*
+resource "aws_dynamodb_table" "tf_lock" {
+  name           = "terraform-lock"
+  read_capacity  = 3
+  write_capacity = 3
+  hash_key       = "LockID"
+ 
+  attribute {
+    name = "LockID"
+    type = "S"
+  }
+
+  attribute {
+    name = "TopScore"
+    type = "N"
+  }
+
+  tags = {
+    Name        = "Terraform Lock Table"
+    Environment = "production"
+  }
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+}
+*/

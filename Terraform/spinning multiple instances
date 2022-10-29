@@ -1,0 +1,183 @@
+#Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
+
+terraform {
+  required_version = "~> 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "aws" {
+  region  = var.region
+}
+
+===============================================================================================================
+#spinning multiple instances with list block
+#Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
+================================================================================================================
+resource "aws_instance" "dev_server" {
+  ami = data.aws_ami.amazon-ec2.id
+  associate_public_ip_address = true
+  instance_type = var.instance_type_list["0"]
+  key_name = var.key_name
+  vpc_security_group_ids = [aws_security_group.custom_ports.name]
+  user_data = file("${path.module}/app-install.sh")
+  
+  count = 3 #Number of instance to be spinned
+
+  tags = {
+    "Name" = "dev_server-${count.index}"
+  }
+}
+
+=========== 
+variable "instance_type_list" {
+  description = "The aws instance type"
+  type        = list(string)
+  default     = ["t2.micro", "t2.medium", "t3.large"]
+}
+
+========
+output "for_output_list_ip" {
+    description = "For Loop with list"
+    value       = { for instance in aws_instance.dev_server: instance.id => instance.public_ip
+    }
+}
+
+output "for_output_list_dns" {
+    description = "For Loop with list"
+    value       = { for instance in aws_instance.dev_server: instance.id => instance.public_dns
+    }
+}
+=========
+
+variable "ingressrules" {
+  description = "List of ingress ports"
+  type        = list(number)
+  default     = [22,80,443,8080,8081,9000]
+}
+
+variable "egressrules" {
+  description = "List of egress ports"
+  type        = list(number)
+  default     = [25,53,80,443,3306,8080,8081,9000]
+}
+
+resource "aws_security_group" "custom_ports" {
+  name        = "custom_ports"
+  description = "Allow Custom Ports inbound traffic"
+  
+  dynamic "ingress" {
+    iterator = port
+    for_each = var.ingressrules
+    content {
+        from_port   = port.value
+        to_port     = port.value
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "egress" {
+    iterator = port
+    for_each = var.egressrules
+    content {
+        from_port   = port.value
+        to_port     = port.value
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+  tags = {
+    Name = "dev_01_sg"
+  }
+}
+
+
+
+=============================================================================================================================
+#spinning multiple instances with mapping block
+#Pls check the output block and the child block of tags in the resource block of "aws_instance" "dev_server"
+==============================================================================================================================
+resource "aws_instance" "dev_server" {
+  #ami = data.aws_ami.amazon-ec2.id
+  #associate_public_ip_address = true
+  instance_type = var.instance_type_map["dev"]
+  #key_name = var.key_name
+  #vpc_security_group_ids = [aws_security_group.custom_ports.name]
+  #user_data = file("${path.module}/app-install.sh")
+  
+  count = 3 #Number of instance to be spinned. Pls check the output block
+
+  tags = {
+    "Name" = "dev_server-${count.index}"
+  }
+}
+============ 
+variable "instance_type_map" {
+  description = "The aws instance type"
+  type        = map(string)
+  default     = {
+    "dev" = "t2.micro"
+    "qa"  = "t2.medium"
+    "prod" = "t3.large"
+  }
+}
+
+=============
+output "for_output_map_ip" {
+    description = "For Loop with map"
+    value       = { for instance in aws_instance.dev_server: instance.id => instance.public_ip
+    }
+}
+output "for_output_map_dns" {
+    description = "For Loop with map"
+    value       = { for instance in aws_instance.dev_server: instance.id => instance.public_dns
+    }
+}
+
+==============
+variable "ingressrules" {
+  description = "List of ingress ports"
+  type        = list(number)
+  default     = [22,80,443,8080,8081,9000]
+}
+
+variable "egressrules" {
+  description = "List of egress ports"
+  type        = list(number)
+  default     = [25,53,80,443,3306,8080,8081,9000]
+}
+
+resource "aws_security_group" "custom_ports" {
+  name        = "custom_ports"
+  description = "Allow Custom Ports inbound traffic"
+  
+  dynamic "ingress" {
+    iterator = port
+    for_each = var.ingressrules
+    content {
+        from_port   = port.value
+        to_port     = port.value
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+
+  dynamic "egress" {
+    iterator = port
+    for_each = var.egressrules
+    content {
+        from_port   = port.value
+        to_port     = port.value
+        protocol    = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+  }
+  tags = {
+    Name = "dev_01_sg"
+  }
+}

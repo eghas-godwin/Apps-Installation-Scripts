@@ -1,0 +1,5 @@
+##search for configurations
+ansible-doc -l | grep jenkins
+ansible-doc community.general.web_infrastructure.jenkins_script
+
+dry run : ansible-playbook playbook.yaml --check

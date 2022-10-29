@@ -1,0 +1,104 @@
+terraform {
+  required_version = "~> 1.0"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
+provider "aws" {
+  region  = var.region
+}
+
+resource "aws_instance" "demo_server" {
+  ami = data.aws_ami.amazon-ec2.id
+  associate_public_ip_address = true
+  instance_type = var.instance_type
+  key_name = var.key_name
+  vpc_security_group_ids = [aws_security_group.allow_ssh.id, aws_security_group.allow_http.id, aws_security_group.allow_https.id]
+  user_data = file("${path.module}/app-install.sh")
+  
+  tags = {
+    "Name" = "demo_server"
+  }
+}
+
+=============
+#see line 20
+=============
+resource "aws_security_group" "allow_ssh" {
+  name        = "allow_ssh"
+  description = "Allow SSH inbound traffic"
+  #vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description      = "Allow SSH Port 22"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+   }
+
+  tags = {
+    Name = "allow_ssh"
+  }
+}
+
+resource "aws_security_group" "allow_http" {
+  name        = "allow-http"
+  description = "Allow HTTP inbound traffic"
+  #vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description      = "Allow HTTP Port 80"
+    from_port        = 80
+    to_port          = 80
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+   }
+
+  tags = {
+    Name = "open_http"
+  }
+}
+
+resource "aws_security_group" "allow_https" {
+  name        = "allow_https"
+  description = "Allow HTTPS inbound traffic"
+  #vpc_id      = aws_vpc.main.id
+
+  ingress {
+    description      = "Allow HTTPS Port 443"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+    }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+   }
+
+  tags = {
+    Name = "allow_https"
+  }
+}

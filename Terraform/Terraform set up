@@ -1,0 +1,65 @@
+#Terraform on aws Redhat
+#Step 1. install awscli
+sudo yum update -y
+sudo yum install curl unzip wget -y
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+#Step 2. install terraform
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+sudo yum -y install terraform
+
+#To enable autocomplete if you use bash shell
+touch ~/.bashrc
+terraform -install-autocomplete
+
+===========================================================
+#windows
+#step 1.
+download terraform from terraform website
+create a new folder and name it terraform-bin
+unzip the file into a new folder created by you which is terraform-bin
+goto PC properties (by right clicking on This PC) --> in systems click Advanced system settings -->
+in system properties click Environmental Variables --> click path in the upper window ---> click edit
+click New (to add a new path), browse for the terraform-bin and add it as a path
+run terraform --version on command prompt to verify.
+OR
+open command prompt as administrator
+run choco install terraform
+
+#step 2. download and configure vscode
+verify that terraform is installed by runing terraform --version
+#cofigure awscli on your windows vscode
+create IAM user and enable programmatic access
+on vscode run aws configure and put your access key credentials
+#Step 3. install Hashicrop plugin on vscode
+goto extention on your vscode and search for terraform
+
+# step 4. create a teraform configuration file e.g ec2.tf and enter below configuration
+====================
+provider "aws" {
+  region  = "us-east-1"
+}
+
+
+resource "aws_instance" "my_demo" {
+  ami           = "ami-06640050dc3f556bb" # us-east-1
+  instance_type = "t2.micro"
+  }
+========================
+
+#step 5. run
+terraform init
+terraform validate
+terraform plan
+terraform apply #use to apply the changes to the state of confihuration
+terraform destory #use to destory terrafory managed infrastructure
+
+#Review terraform manifest for ec2 instance
+
+
+
+
+

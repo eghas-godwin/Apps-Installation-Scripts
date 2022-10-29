@@ -1,0 +1,23 @@
+# ReplicationController
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: <RRName>
+  labels: # Labels for RR
+    <key>: <value>
+spec:
+  replicas: <NoOfPodReplicas> 5
+  selector: # ReplicationController will fine pod based on the below key and value
+    <key>: <value>
+  
+  template:
+    metadata: #Pod metadata
+    name: <PodName>
+    labels: # Pod labels
+      <key>: <value>
+  spec:
+    containers:
+    - name: <containerName>
+      image: <imagaName>
+    ports:
+    - containerPort: <containerPort>
