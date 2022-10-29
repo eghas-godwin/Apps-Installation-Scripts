@@ -1,3 +1,4 @@
+#!/bin/bash
 sudo yum install wget -y
 sudo yum install unzip -y
 sudo yum install tree -y
