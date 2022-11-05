@@ -1,22 +1,22 @@
 #!/bin/bash
 sudo hostname docker
-sudo apt update && install docker.io -y
+sudo apt update 
+sudo apt install docker.io -y
 sudo usermod -aG docker ubuntu 
 sudo apt install wget -y
-
 sudo apt update -y
 sudo apt install openjdk-11-jdk -y
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-
-sudo apt update && install jenkins -y
+sudo apt update
+sudo apt install jenkins -y
 sudo systemctl start jenkins
 sudo echo "jenkins ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/jenkins
 sudo usermod -aG docker jenkins
 sudo systemctl restart docker.service
 
-sudo su - jenkins
-sudo chown jenkins /var/run/docker.sock
+#sudo su - jenkins
+#sudo chown jenkins /var/run/docker.sock
 
 #Configure ssh
 #sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
