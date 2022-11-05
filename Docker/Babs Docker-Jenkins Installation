@@ -1,7 +1,6 @@
 #!/bin/bash
 sudo hostname docker
-sudo apt update -y 
-sudo apt install docker.io -y
+sudo apt update && install docker.io -y
 sudo usermod -aG docker ubuntu 
 sudo apt install wget -y
 
