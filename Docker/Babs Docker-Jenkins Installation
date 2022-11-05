@@ -21,6 +21,8 @@ sudo systemctl restart docker.service
 #sudo su - jenkins
 #sudo chown jenkins /var/run/docker.sock
 
+#When running pipeline job, login to docker from within the server i.e. "docker login -u "username"" so that you can easily execute "docker push 'reponame'" within the pipeline
+
 #Configure ssh
 #sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 #sudo service sshd restart
