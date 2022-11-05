@@ -23,6 +23,42 @@ sudo chown jenkins /var/run/docker.sock
 
 #When running pipeline job, login to docker from within the server i.e. "docker login -u "username"" so that you can easily execute "docker push 'reponame'" within the pipeline
 
+pipeline{
+    agent any
+    tools {
+        maven 'maven3.8.6'
+    }
+    stages{
+        stage('Clone Code'){
+            steps{
+                sh "echo cloning code"
+                sh "echo clone code complete"
+                git 'https://github.com/Ohubabs/tesla-app.git'
+            }
+        }
+        stage('Build Code'){
+            steps{
+                sh "echo Build War Package"
+                sh "mvn clean package"
+            }
+        }
+        stage('Quality Report'){
+            steps{
+                sh "echo Quality Report Loading"
+                sh "echo Quality Report Complete"
+                sh "mvn sonar:sonar"
+            }
+        }
+        stage('PreDeployment'){
+            steps{
+                sh "echo build image"
+                sh "docker build -t princebabs/wfapp:11 ."
+                sh "docker push princebabs/wfapp:11"
+            }
+        }
+    }
+}
+
 #Configure ssh
 sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
 sudo service sshd restart
