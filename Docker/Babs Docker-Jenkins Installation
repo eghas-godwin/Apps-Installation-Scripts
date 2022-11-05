@@ -17,7 +17,7 @@ sudo usermod -aG docker jenkins
 sudo systemctl restart docker.service
 
 sudo su - jenkins
-sudo chown -R jenkins /var/run/docker.sock
+sudo chown jenkins /var/run/docker.sock
 
 #Configure ssh
 #sudo sed -i "/^[^#]*PasswordAuthentication[[:space:]]no/c\PasswordAuthentication yes" /etc/ssh/sshd_config
