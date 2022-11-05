@@ -1,3 +1,5 @@
+#Copy and Paste below script in the configure system section of Advanced setting during Launch EC2 instance setup
+
 #!/bin/bash
 sudo hostname docker
 sudo apt update -y 
@@ -15,6 +17,7 @@ sudo echo "jenkins ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/jenkins
 sudo usermod -aG docker jenkins
 sudo systemctl restart docker.service
 
+#After setting up jenkins on the browser with necessary plugins i.e. Docker, run the below commands and afterwards you'll be able to run docker commands in the pipeline.
 #sudo su - jenkins
 #sudo chown jenkins /var/run/docker.sock
 
