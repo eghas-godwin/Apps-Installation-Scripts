@@ -1,0 +1,34 @@
+firewall-cmd --list-all
+firewall-cmd --add-service=http  (to add http service)
+sudo firewall-cmd --get-services (show all services)
+ls -al /usr/lib/firewalld
+ls -al /usr/lib/firewalld/services
+ cat /usr/lib/firewalld/services/ssh.xml (you can change your ssh port)
+  cat /usr/lib/firewalld/services/dns.xml
+nmap localhost (list all service open)
+
+
+
+
+-Dns is set at /etc/resolv.conf
+-ip address set at /etc/ifcfg-ens32
+-rpm q a list all installed packages 
+-Yum remove package-name to Uninstaller
+-rpm minus e packages _name to uninstall
+-env to check your environment 
+-echo $home will list all the path in home dir
+-unlink file_name to delete a file
+-grep any_search-word * to search for any thing containing any_search-word
+- ln file1 file2 hardlink
+- ln -s file1 file2 softlink
+- fdisk -l to list all partitions 
+- fdisk /dev/anything (/dev/anything is the partition name or path) enter into the partition  and click m to show help options
+-mkfs list  files systems 
+mkfs.xfs /dev/anything (xfs is the files system type)
+
+To mount a disk
+Create  a mount point by mkdir /newstorage or /storage2
+mount /dev/anything    /newstorage 
+
+vi /etc/fstab to Edith all mount point
+umount /dev/anything  to unmount
