@@ -5,35 +5,8 @@ crontab -e
 we need to check out the/var/log/syslog file
 $ sudo grep –a “Cronjob1.sh” /var/log/syslog
 
-
-
-Cron Job Examples
-* 2 0 * 4 /root/backup.sh
-Cron Job	                                   Command
-Run Cron Job Every Minute                   	* * * * * /root/backup.sh
-Run Cron Job Every 30 Minutes	                30 * * * * /root/backup.sh
-Run Cron Job Every Hour	                      0 * * * */root/backup.sh
-Run Cron Job Every Day at Midnight	          0 0 * * * /root/backup.sh
-Run Cron Job at 2 am Every Day	              0 2 * * * /root/backup.sh
-Run Cron Job Every 1st of the Month	          0 0 1 * * /root/backup.sh
-Run Cron Job Every 15th of the Month	        0 0 15 * * /root/backup.sh
-Run Cron Job on December 1st – Midnight	      0 0 0 12 * /root/backup.sh
-Run Cron Job on Saturday at Midnight	        0 0 * * 6 /root/backup.sh
-Once you have finished adding tasks, save the file and exit. The cron daemon will read and execute the instructions provided.
-
-=====================================
-Edit crontab for a Different User
-crontab –u other_username –e
-
-view a user cron job
-sudo crontab -u userName -l
-
-Linux view daily cronjob
-cd /etc/cron.daily/
-ls -l
-cat filename
-cas passwd
-
+try below command
+man crontab 
 ============================================================
 on WSL
  sudo service cron status
@@ -48,3 +21,35 @@ ps ax | grep syslog
 ls -l /var/log/syslog
 cat /var/log/syslog
 sudo grep –a “Cronjob1.sh” /var/log/syslog
+
+=====================================
+Edit crontab for a Different User
+crontab –u other_username –e
+
+view a user cron job
+sudo crontab -u userName -l
+
+Linux view daily cronjob
+cd /etc/cron.daily/
+ls -l
+cat filename
+cas passwd
+
+
+=========================================
+Cron Job Examples
+* 2 0 * 4 /root/backup.sh
+Cron Job	                                   Command
+Run Cron Job Every Minute                   	* * * * * /root/backup.sh
+Run Cron Job Every 30 Minutes	                30 * * * * /root/backup.sh
+Run Cron Job Every Hour	                      0 * * * */root/backup.sh
+Run Cron Job Every Day at Midnight	          0 0 * * * /root/backup.sh
+Run Cron Job at 2 am Every Day	              0 2 * * * /root/backup.sh
+Run Cron Job Every 1st of the Month	          0 0 1 * * /root/backup.sh
+Run Cron Job Every 15th of the Month	        0 0 15 * * /root/backup.sh
+Run Cron Job on December 1st – Midnight	      0 0 0 12 * /root/backup.sh
+Run Cron Job on Saturday at Midnight	        0 0 * * 6 /root/backup.sh
+Once you have finished adding tasks, save the file and exit. The cron daemon will read and execute the instructions provided.
+
+
+
