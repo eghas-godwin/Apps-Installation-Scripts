@@ -1,12 +1,16 @@
 firewall-cmd --list-all
 firewall-cmd --add-service=http  (to add http service)
 sudo firewall-cmd --get-services (show all services)
+systemctl --all (show all running service)
+systemctl enable/disable service_name
 ls -al /usr/lib/firewalld
 ls -al /usr/lib/firewalld/services
  cat /usr/lib/firewalld/services/ssh.xml (you can change your ssh port)
   cat /usr/lib/firewalld/services/dns.xml
 nmap localhost (list all service open)
-
+top (tells the system processes)
+cat /etc/os-release (check os of a system)
+df or df -h or  lsblk (list all volume)
 
 
 
