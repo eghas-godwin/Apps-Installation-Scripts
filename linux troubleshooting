@@ -1,0 +1,14 @@
+verify your ip address is currect (ip addr)
+verify services are running (netstat)
+verify the frewall is not in the way (firewall-cmd --list-all)
+verify remote host is up (ping)
+verify remote ports are open (nmap)
+check the logs (/var/log)
+
+Apache Firewall Rules
+To see your web service from outside you need to allow the service through the firewall terminal
+firewall-cmd --zone=public --add-service=http
+firewall-cmd --zone=public --add-service=https
+verify the service are present in the firewall as well
+firewall-cmd --zone=public --list-services
+firewall-cmd --list-all
