@@ -8,7 +8,7 @@ apt list --installed (show a list of all installed packages)
 man xxx (list the uses of a command)
 man ip, man ssh, man cmatrix etc
 whatis xxxcommandxxxx
-whatis ps whatis ssh     e.t.c
+whatis ps, whatis ssh,  what is reboot     e.t.c
 
 
 
