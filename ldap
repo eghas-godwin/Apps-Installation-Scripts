@@ -1,0 +1,83 @@
+LDAP Installation  --- https://ubuntu.com/server/docs/service-ldap
+======================================
+sudo apt install slapd ldap-utils   # enter admin password
+sudo dpkg-reconfigure slapd      # click No and input your DNS domain name = pratice.netr
+#input the same dns domain name in organization name
+#input your previously created admin password
+
+
+check if slapd is installed
+===============================
+sudo tree /etc/ldap/slapd.d
+
+
+Populating the Directory or add entries into ldap
+=====================================================
+
+Create the following LDIF file and call it add_content.ldif
+
+dn: ou=Employee,dc=pratice,dc=net
+objectClass: organizationalUnit
+ou: Employee
+
+dn: ou=Groups,dc=pratice,dc=net
+objectClass: organizationalUnit
+ou: Groups
+
+dn: cn=developers,ou=Groups,dc=pratice,dc=net
+objectClass: posixGroup
+cn: developers
+gidNumber: 5000
+
+dn: uid=john,ou=Employee,dc=pratice,dc=net
+objectClass: inetOrgPerson
+objectClass: posixAccount
+objectClass: shadowAccount
+uid: john
+sn: Doe
+givenName: John
+cn: John Doe
+displayName: John Doe
+uidNumber: 10000
+gidNumber: 5000
+userPassword: john123
+gecos: John Doe
+loginShell: /bin/bash
+homeDirectory: /home/john/
+============================================================
+when you exit add_content.ldif  run
+$ ldapadd -x -D cn=admin,dc=pratice,dc=net -W -f add_content.ldif
+Enter LDAP Password: ********
+      adding new entry "ou=Employee,dc=pratice,dc=net"
+
+      adding new entry "ou=Groups,dc=pratice,dc=net"
+
+      adding new entry "cn=developers,ou=Groups,dc=pratice,dc=net"
+
+      adding new entry "uid=john,ou=Employee,dc=pratice,dc=net"
+
+#We can check that the information has been correctly added with the ldapsearch utility.
+$ ldapsearch -x -LLL -b dc=pratice,dc=net '(uid=john)' cn gidNumber
+dn: uid=john,ou=People,dc=example,dc=com
+cn: John Doe
+gidNumber: 5000
+
+$ ldapsearch -x -LLL -b dc=pratice,dc=net
+to search every employee info in the organization pratice.net
+=======================================================================
+
+To modify create a file called modify_content.ldif
+sudo vim modify_content.ldif
+   dn: uid=john,ou=Employee,dc=pratice,dc=net
+   changetype: modify
+   replace: givenName
+   givenName: john1
+   -
+   replace: sn
+   sn: tom
+   save and exit
+$ ldapmodify -x -D cn=admin,dc=pratice,dc=net -W -f modify_content.ldif
+
+
+https://manpages.ubuntu.com/manpages/bionic/man1/ldapadd.1.html
+https://ldapwiki.com/wiki/Main
