@@ -1,6 +1,7 @@
 apt install httpd
 
 configuration
+=============================
  /etc/httpd/conf
  /etc/httpd/conf/httpd.conf
 /etc/httpd/conf.d/
@@ -8,6 +9,7 @@ The standard location for web pages is
 /var/www/html/xxxxxxx
 
 Apache Firewall Rules
+===================================
 To see your web service from outside you need to allow the service through the firewall terminal
 firewall-cmd --zone=public --add-service=http
 firewall-cmd --zone=public --add-service=https
@@ -16,3 +18,10 @@ firewall-cmd --zone=public --list-services
 firewall-cmd --list-all
 
 Troubleshooting
+=============================
+verify your ip address is currect (ip addr)
+verify services are running (netstat)
+verify the frewall is not in the way (firewall-cmd --list-all)
+verify remote host is up (ping)
+verify remote ports are open (nmap)
+check the logs (/var/log)
