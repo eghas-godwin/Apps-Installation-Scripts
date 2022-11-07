@@ -1,3 +1,17 @@
+ps
+ps -aux (list all processes)
+top (list all processes)
+htop
+which xxxxx (tells the location of an installation)
+which ssh
+apt list --installed (show a list of all installed packages)
+man xxx (list the uses of a command)
+man ip, man ssh, man cmatrix etc
+whatis xxxcommandxxxx
+whatis ps whatis ssh     e.t.c
+
+
+
 firewall-cmd --list-all
 firewall-cmd --add-service=http  (to add http service)
 sudo firewall-cmd --get-services (show all services)
