@@ -1,0 +1,61 @@
+Ubuntu stmp gmail setup and configuration
+=====================================
+
+install postfix
+sudo apt-get update && sudo apt-get upgrade
+sudo apt-get -y install postfix 
+choose Internet Site
+
+Next, run it and activate it on system start-up:
+sudo systemctl status postfix
+sudo systemctl start postfix
+sudo systemctl activate postfix
+
+Get a Google App Password
+
+sudo cat /etc/postfix/main.cf 
+
+Configure SASL with Your Gmail Credentials
+ls /etc/postfix/sasl
+
+Create a the file /etc/postfix/sasl/sasl_passwd and add your Gmail address and app password to it like this:
+sudo vim /etc/postfix/sasl/sasl_passwd  
+ #input #gmail credentials below
+[smtp.gmail.com]:587 gmailaddress@gmail.com:GoogleAppPassword [owsbmvsalwkdzebl]
+[smtp.gmail.com]:587 gmailaddress@gmail.com:owsbmvsalwkdzebl
+sudo postmap /etc/postfix/sasl/sasl_passwd
+ls /etc/postfix/sasl/   (will display sasl_passwd  sasl_passwd.db)
+sudo chown root:root /etc/postfix/sasl/sasl_passwd /etc/postfix/sasl/sasl_passwd.db
+sudo chmod 0600 /etc/postfix/sasl/sasl_passwd /etc/postfix/sasl/sasl_passwd.db
+
+sudo vim /etc/postfix/main.cf   and make changes to relayhost
+#mydestination = $myhostname, localhost, localhost.localdomain
+*relayhost = [smtp.gmail.com]:587
+#mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+
+at the end of the line add
+# Enable SASL authentication
+smtp_sasl_auth_enable = yes
+smtp_sasl_security_options = noanonymous
+smtp_sasl_password_maps = hash:/etc/postfix/sasl/sasl_passwd
+smtp_tls_security_level = encrypt
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+(save and quit with wq!)
+ls /etc/ssl/certs/ca-certificates.crt
+sudo systemctl restart postfix
+
+Test Sending Email from Gmail
+==============================
+sendmail tony@tonytravels.com
+To: tony@tonytravels.com
+Subject: Test mail #1
+This is just a test email
+* press Ctrl D to send
+
+crontab emails with mailto
+===============================
+MAILTO="tony@tonytravels.com"
+* * * * * echo "Hello world"
+
+
+https://tonyteaches.tech/postfix-gmail-smtp-on-ubuntu/
