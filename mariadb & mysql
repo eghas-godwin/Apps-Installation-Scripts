@@ -1,0 +1,56 @@
+#Installation
+sudo apt update
+sudo apt-get install mariadb-server
+sudo mysql_secure_installation
+    password for root: press enter
+    Remove anonymous users? [Y/n] Y
+    Disallow root login remotely? [Y/n] Y
+    Remove test database and access to it? [Y/n] Y
+    Reload privilege tables now? [Y/n] Y
+end of installation
+========================================================
+To access mysql
+sudo mysql
+use Ctrl D to exit
+
+show databases;   #To show all avalable databases
+
+create database devops;  #To create a database called devops
+
+drop database devops; #To delete the database called devops that was previously created
+
+use devops; #To use database called devops
+
+CREATE TABLE employees (id INT(10), name VARCHAR(50), age INT(3), payrate INT(10), employdate INT(10)); #To create a table called employees
+
+SHOW TABLES;  #To show all the tables in devops database
+
+DESC table_name; #To show details about the table
+DESC employees; #To show details about the table employees
+
+INSERT INTO employees (   #after the open bracke press enter
+  -> id, name, age, payrate, employdate)
+  -> VALUES (1, 'John', 25, 78.00, 11/25/2020);
+ or
+INSERT INTO staff ( id, name, age, payrate, employdate) VALUES (1, 'John', 25, 78, 11252022);
+
+SELECT * FROM employees;  #To show details of entries in employees table
+SELECT * FROM employees WHERE id=1; #To show details of id 1 in employees table
+
+UPDATE table_name SET name='Johnny', age=30 WHERE id=1;  #To make changes to data in tabel_name
+UPDATE employees SET name='Johnny', age=30 WHERE id=1;  #To make changes to data in tabel_name
+
+===========================================
+Mysql User Management
+show databases;
+use mysql;
+show tables;
+SELECT * FROM mysql.user \G
+SELECT Host, User, Password FROM mysql.user \G #To show all the users
+   Host: localhost
+   User: mariadb.sys
+   Password:
+SELECT Host, User, Password FROM mysql.user; #To show all the users using table
+
+CREATE USER 'john'@'localhost' IDENTIFIED BY '123'; #To crte a user called john with password 123
+SELECT Host, User, Password FROM mysql.user;  
