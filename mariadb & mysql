@@ -86,13 +86,28 @@ UPDATE mysql.user SET Host='172.31.93.105' WHERE User='john'; #user john can ony
 UPDATE mysql.user SET Host='172.31.93.105' WHERE Host='localhost' AND User='john';
 
 FLUSH PRIVILEGES;  #flush to apply
+================================================================================
+
+#To remove or delete user
+DROP USER 'john'@'172.31.93.105';
+SELECT Host, User, Password FROM mysql.user; #To show all the users using table
+
+# To Add User
+CREATE USER 'john'@'172.31.93.105' IDENTIFIED BY '123'; 
+
+==================================================================================
+#To give all permissions or privileges: done on the host machine
+GRANT ALL ON database_name.* TO 'user'@'Host'
+GRANT ALL ON devops.* TO 'john'@'172.31.93.105';  #granting permission to access all tables in devops database
+FLUSH PRIVILEGES;
+==================================================================
 
 
 #To change privileges, first revoke all the permission to user
 revoke all privileges on *.* from 'username'@'localhost';
 
- grant SELECT,INSERT,UPDATE,DELETE ON `db`.* TO 'username'@'%';
+grant SELECT,INSERT,UPDATE,DELETE ON `db`.* TO 'username'@'%';
 
- flush privileges;
+flush privileges;
 
 How to Change MySQL User Root Password in Linux
