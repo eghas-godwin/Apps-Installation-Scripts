@@ -60,14 +60,16 @@ login with john from thesame server or localhost
 mysql -u john -p  #enter john's password
 history | tail -5 #linux command to show hitory
 
-login with from external server
-first install mysql-client on the server
+#login with from external server
+#first install mysql-client on the server
 sudo apt-get update
 sudo apt install mysql-client
+
+#login
 mysql -h ip_address -u john -p   #ip_address is the ip address of the host server or mysql server you want to connect and not client server
 mysql -h 172.31.88.234 -u john -p
 netstat -tulpn #To check lisening ports
-nc -zv 172.31.88.234 3306
+nc -zv 172.31.88.234 3306  (ip of the host)
 connection failed because mysql is currently listening in 127.0.0.1:3306
 #Tell mysql to listen in all network or 172.31.88.234 interface
 sudo grep -r 'bind' /etc/mysql #vi and edith bind-address
@@ -75,8 +77,22 @@ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf   #change bind-address from 127
 sudo systemctl restart mysql
 netstat -tulpn 
 #Update Hostname from localhost to ip
+RENAME USER "john"@"localhost" TO "john"@"%";
+RENAME USER "john"@"localhost" TO "john"@"172.31.93.105";
+OR
 UPDATE mysql.user SET Host='%' WHERE User='john';  #user john can access the database from any machine NOT a good idea
-UPDATE mysql.user SET Host='18.212.167.237' WHERE User='john'; #user john can ony access the database from 18.212.167.237 
+UPDATE mysql.user SET Host='172.31.93.105' WHERE User='john'; #user john can ony access the database from 
+                                                            #172-31-93-105 which is another client machine 
+UPDATE mysql.user SET Host='172.31.93.105' WHERE Host='localhost' AND User='john';
+
+FLUSH PRIVILEGES;  #flush to apply
 
 
+#To change privileges, first revoke all the permission to user
+revoke all privileges on *.* from 'username'@'localhost';
 
+ grant SELECT,INSERT,UPDATE,DELETE ON `db`.* TO 'username'@'%';
+
+ flush privileges;
+
+How to Change MySQL User Root Password in Linux
