@@ -102,6 +102,19 @@ GRANT ALL ON devops.* TO 'john'@'172.31.93.105';  #granting permission to access
 FLUSH PRIVILEGES;
 ==================================================================
 
+Mysql backup a Database using mysqldump
+
+Generate the backup of a single database
+$ mysqldump -u root -p sakila > file_20200424.sql
+
+Generate the backup of multiple databases or all the databases
+$ mysqldump -u root -p --databases sakila employees > file.sql
+
+Generate the backup of database structure
+$ mysqldump -u root -p --no-data sakila > file.sql
+
+Generate the backup of a specific table
+$ mysqldump -u root -p sakila actor payment > file.sql
 
 #To change privileges, first revoke all the permission to user
 revoke all privileges on *.* from 'username'@'localhost';
