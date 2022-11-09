@@ -16,8 +16,11 @@ If the file is currently empty, paste the following:
 
 #restat docker
 systemctl docker restart
+OR
+dockerd
 try to connect or access the metric server using the ip of your docker server with port 9323
-my ip is http://172.25.107.123:9323
+localhost:9323/metrics
+my ip is http://172.25.107.123:9323/metrics
 if no connection then check or open firewall
 netstat -tulpn  #check if port 9323 is open.
 sudo firewall-cmd --permanent --zone=public --add-port=9323/tcp
@@ -31,3 +34,7 @@ if it failed then use this file
 #restat docker
 systemctl docker restart
 dockerd #to restart the docker deamon
+
+run prometheus as a docker container
+docker run -d --name prometheus -p 9090:9090 -v prometheus_conf:/etc/prometheus prom/prometheus
+
