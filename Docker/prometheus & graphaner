@@ -42,6 +42,26 @@ localhost:9090  #To access prometheus
 or
 172.25.107.123:9090
 
+Configure Prometheus
+docker volume ls  #look out for prometheus_conf
+cd /var/lib/docker/volumes/prometheus_conf/_data/
+ls  #look out for prometheus.yml
+sudo vi prometheus.yml
+OR
+vim /var/lib/docker/volumes/prometheus_conf/_data/prometheus.yml
+add a new content for job_name and targets without making any changes to the previous present data in the fill, 
+just add your new content below   #The 
+
+  - job_name: "docker"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["172.25.107.123:9090"]
+
+
+
 
 
 
