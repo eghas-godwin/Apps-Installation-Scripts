@@ -58,7 +58,12 @@ just add your new content below   #The
     # scheme defaults to 'http'.
 
     static_configs:
-      - targets: ["172.25.107.123:9090"]
+      - targets: ["172.25.107.123:9323"]
+
+save and quit
+
+docker restart prometheus
+docker ps
 
 
 
