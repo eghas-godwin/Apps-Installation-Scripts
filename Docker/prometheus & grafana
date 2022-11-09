@@ -80,9 +80,9 @@ password: admin
 integration of grafana with prometheus
 add data source === prometheous
 add prometheus ip and port (172.31.96.40:9090) in the url
-172.31.96.40:9090
+http://172.31.96.40:9090
 save and test
-
+go to dashboard to add new dashboards
 
 
 
