@@ -64,7 +64,24 @@ save and quit
 
 docker restart prometheus
 docker ps
+http://172.31.96.40:9090/  --> status --> target #check endpoints for docker
+goto prometheous icon and click
+go to http://172.25.107.123:9323/metrics and copy
+engine_daemon_container_states_containers and paste it in the box on search box with Expression press.....
+click execute.
 
+install grafana
+docker run -d --name grafana -p 3000:3000 -v grafana_conf:/etc/grafana -v grafana_data:/var/lib/grafana -v grafana_logs:/var/log/grafana grafana/grafana
+172.25.107.123:3000
+default login 
+username: admin
+password: admin
+
+integration of grafana with prometheus
+add data source === prometheous
+add prometheus ip and port (172.31.96.40:9090) in the url
+172.31.96.40:9090
+save and test
 
 
 
