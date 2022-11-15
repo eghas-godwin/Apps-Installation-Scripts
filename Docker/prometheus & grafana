@@ -49,6 +49,10 @@ ls  #look out for prometheus.yml
 sudo vi prometheus.yml
 OR
 vim /var/lib/docker/volumes/prometheus_conf/_data/prometheus.yml
+OR
+In docker desktop: click on containers --> prometheus --> inspect and copy the link of mounts --> terminal and cd
+into the link ls for for prometheus.yml and vi prometheus.yml
+
 add a new content for job_name and targets without making any changes to the previous present data in the fill, 
 just add your new content below   #The 
 
