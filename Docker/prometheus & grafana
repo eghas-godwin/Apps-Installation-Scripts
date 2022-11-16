@@ -66,6 +66,7 @@ just add your new content below   #The
 
 save and quit
 
+ipconfig #on windows to get wsl ipv4 and use it to replace the target ip address above
 docker restart prometheus
 docker ps
 http://172.31.96.40:9090/  --> status --> target #check endpoints for docker
