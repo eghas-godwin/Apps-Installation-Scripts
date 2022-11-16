@@ -23,3 +23,8 @@ ansible mysql -a "apt-get update" -b
 ansible mysql -a "apt install git" -b
 ansible mysql -a "git --version"
 #ansible mysql -a "apt remove git" -b  #not working, freezees my ansible server
+ansible mysql -m apt -a "name=git state=present" -b
+ansible mysql -m apt -a "name=git state=absent" -b
+ansible mysql -m package -a "name=git state=present" -b   #install git
+ansible mysql -m package -a "name=git state=absent" -b   #uninstall git
+
