@@ -14,3 +14,12 @@ ansible host -m module -a "command" -b
 ansible web_server -m shell -a ping
 ansible web_server -m ping  #you can run command without -a option
 ansible web_server -m shell -a "df -h"
+ansible web_server -m shell -a "free -m"
+
+ansible mysql -m shell -a "apt-get update" -b
+ansible mysql -m command -a "apt-get update" -b
+ansible mysql -a "apt-get update" -b
+
+ansible mysql -a "apt install git" -b
+ansible mysql -a "git --version"
+ ansible mysql -a "apt remove git" -b
