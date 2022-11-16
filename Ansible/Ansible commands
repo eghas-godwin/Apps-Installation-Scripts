@@ -3,3 +3,14 @@ ansible-doc -l | grep jenkins
 ansible-doc community.general.web_infrastructure.jenkins_script
 
 dry run : ansible-playbook playbook.yaml --check
+
+Ansible command module
+------------------------------
+ansible host -m module -a "command" -b
+    -m is the module
+    -a is the option or command
+    -b is using excalated previlage (sudo)
+
+ansible web_server -m shell -a ping
+ansible web_server -m ping  #you can run command without -a option
+ansible web_server -m shell -a "df -h"
