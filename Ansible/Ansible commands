@@ -28,3 +28,12 @@ ansible mysql -m apt -a "name=git state=absent" -b
 ansible mysql -m package -a "name=git state=present" -b   #install git
 ansible mysql -m package -a "name=git state=absent" -b   #uninstall git
 
+ansible iac -m shell -a "terraform init" 
+ansible iac -m shell -a "terraform plan" 
+ansible iac -m shell -a "terraform apply --auto-approve"
+
+ansible localhost -m package -a "name=httpd state=present" -b
+ansible localhost -a "systemctl enable httpd" -b
+ansible localhost -a "systemctl start httpd" -b
+ansible localhost -a "systemctl status httpd"
+ansible localhost -m copy -a "src=index.html dest=/var/www/html/index.html" -b 
