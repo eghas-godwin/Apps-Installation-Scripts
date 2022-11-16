@@ -22,4 +22,4 @@ ansible mysql -a "apt-get update" -b
 
 ansible mysql -a "apt install git" -b
 ansible mysql -a "git --version"
- ansible mysql -a "apt remove git" -b
+ansible mysql -a "apt remove git" -b
