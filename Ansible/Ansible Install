@@ -99,7 +99,15 @@ base64
 #change ansible vault password: ansible-vault rekey /etc/ansible/group_vars/docker.yml
 ansible docker -m shell -a "df -h" --ask-vault-pass
 
-passwordless authentication
+ssh/passwordless authentication
+--------------------------------
+ssh-keygen
+sudo ls .ssh
+cat .ssh/known_hosts #list of hosts
+cat .ssh/id_rsa  #ssh private key
+cat .ssh/id_rsa.pub #ssh public key
+
+
 
 
 
