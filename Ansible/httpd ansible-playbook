@@ -1,0 +1,16 @@
+- hosts: mysqlserver
+  become: true
+  tasks:
+  - name: system update
+    shell: name=apt-get state=updated
+  - name: install apache webservers
+    package: name=apache2 update_cache=yes state=present
+  - name: start apache
+    service: name=apache2 state=started
+  - name: copy index file
+    copy: src=index.html dest=/var/www/html/index.html
+    notify:
+    - restart apache2
+  handlers:
+  - name: restart apache2
+    service: name=apachea2 state=restarted
