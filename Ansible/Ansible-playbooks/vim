@@ -1,0 +1,8 @@
+- hosts: web
+  gather_facts: false
+  become: true
+  tasks:
+  - name: Installing vim
+    package:
+     name: vim
+     state: present 
