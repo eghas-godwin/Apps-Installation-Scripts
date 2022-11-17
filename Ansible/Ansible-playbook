@@ -1,3 +1,7 @@
+##search for configurations
+ansible-doc -l | grep jenkins
+ansible-doc community.general.web_infrastructure.jenkins_script
+
 ansible-playbook httpd.yml --syntax-check #playbook syntax check for error
 ansible-playbook playbook.yaml --check #dry run
 ansible-playbook playbook.yaml #To run ansible-playbook
