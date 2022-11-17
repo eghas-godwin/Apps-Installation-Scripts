@@ -66,6 +66,7 @@ Ansible installation in ubuntu
 [docker] 
 54.226.71.208  ansible_user=ubuntu ansible_ssh_private_key_file=/tmp/awssshkey.pem 
 52.90.91.206  ansible_user=ubuntu ansible_ssh_private_key_file=/tmp/class28key.pem 
+52.90.91.206  ansible_user=ubuntu ansible_password=admin123
 
 [appServer] 
 204.236.158.60 ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/class29key.pem 
