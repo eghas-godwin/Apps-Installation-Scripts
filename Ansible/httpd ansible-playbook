@@ -1,4 +1,6 @@
-- hosts: mysqlserver
+install apache2 httpd
+==================================================================
+- hosts: web_server
   become: true
   tasks:
   - name: system update
@@ -14,3 +16,17 @@
   handlers:
   - name: restart apache2
     service: name=apachea2 state=restarted
+
+uninstall apache2 httpd
+=========================================================================
+- hosts: web_server
+  tasks:
+  - name: disable and stop httpd service
+    service:
+     name: apache2
+     enabled: false
+     state: stopped
+  - name: remove httpd package
+    package:
+     name: apache2
+     state: absent
