@@ -1,0 +1,4 @@
+ansible-playbook httpd.yml --syntax-check #playbook syntax check for error
+ansible-playbook playbook.yaml --check #dry run
+ansible-playbook playbook.yaml #To run ansible-playbook
+
