@@ -102,6 +102,7 @@ ansible docker -m shell -a "df -h" --ask-vault-pass
 passwordless authentication
 
 
+
 modules:
   ping 
   ansible hosts - modules
