@@ -97,6 +97,8 @@ amazon kms
 base64
 #view encrytion: ansible-vault view /etc/ansible/group_vars/docker.yml
 #change ansible vault password: ansible-vault rekey /etc/ansible/group_vars/docker.yml
+ansible docker -m shell -a "df -h" 
+    ERROR! Attempting to decrypt but no vault secrets found
 ansible docker -m shell -a "df -h" --ask-vault-pass
 
 ssh/passwordless authentication
@@ -106,10 +108,99 @@ sudo ls .ssh
 cat .ssh/known_hosts #list of hosts
 cat .ssh/id_rsa  #ssh private key
 cat .ssh/id_rsa.pub #ssh public key
+#export the keys to the hosts
+  manual single export: ssh-copy-id ubuntu@54.226.71.208 
 
+#export key automation:
+- hosts: all
+  tasks:
+  - name: make direcotry
+    file:
+      path: "/home/<username>/.ssh"
+      state: directory
+  - name: create empty file
+    file:
+      path: "/home/<username>/.ssh/authorized_keys"
+      state: touch
+  - name: put pubkey
+    lineinfile:
+      path: "/home/<username>/.ssh/authorized_keys"
+      line: "{{ pubkey }}"
+===============================================
+- hosts: web
+  tasks:
+  - name: make direcotry
+    file:
+      path: "/home/ansible/.ssh"
+      state: directory
+  - name: create empty file
+    file:
+      path: "/home/ansible/.ssh/authorized_keys"
+      state: touch
+  - name: put pubkey
+    lineinfile:
+      path: "/home//.ssh/authorized_keys"
+      line: "{{ pubkey }}"
+===============================================================
 
+#create ansible user manager all the servers through the server
+# ansible <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
+# ansible-playbook -b ansible-createuser.yml -u <userName> --private-key=~/devops.pem
+# vi create_user.yml
+# ansible-playbook create_user.yml -b --ask-vault-pass
 
+- hosts: all
+  tasks:
+  - name: Create Ansible User
+    user:
+      name: ansible
+      create_home: true
+      shell: /bin/bash
+      comment: "Ansible Management Account"
+      expires: -1
+      password: "{{ 'admin123' | password_hash('sha512','A512') }}"
+  - name: Deploy Local User SSH Key
+    authorized_key:
+      user: ansible
+      state: present
+      manage_dir: true
+      key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub') }}"
+  - name: Setup Sudo Access for Ansible User
+    copy:
+      dest: /etc/sudoers.d/ansible
+      content: 'ansible ALL=(ALL) NOPASSWD: ALL' 
+      validate: /usr/sbin/visudo -cf %s
+  -  name: Disable Password Authentication
+     lineinfile:
+        dest=/etc/ssh/sshd_config
+        regexp='^PasswordAuthentication'
+        line="PasswordAuthentication no"
+        state=present
+        backup=yes
+     notify:
+       - restart ssh
+  handlers:
+  - name: restart ssh
+    service:
+      name=sshd
+      state=restarted
+==========================================================
+ansible-playbook create_user.yml -b
+[docker] 
+#54.226.71.208  ansible_user=ubuntu ansible_ssh_private_key_file=/tmp/awssshkey.pem 
+#52.90.91.206  ansible_user=ubuntu ansible_ssh_private_key_file=/tmp/class28key.pem 
+#52.90.91.206  ansible_user=ubuntu ansible_password=admin123  #command: ansible docker -m shell -a "df -h"
+#52.90.91.206  ansible_user=ubuntu ansible_password={{pass}} #command: ansible docker -m shell -a "df -h" --extra-vars "pass=admin123"
+52.90.91.206  
 
+ansible docker -m ping
+    ERROR! Attempting to decrypt but no vault secrets found
+    # delete /etc/ansible/group_vars/docker.yml  #docker.yml contains the encrypted password
+    rm /etc/ansible/group_vars/docker.yml 
+ansible docker -m ping 
+ansible web -m shell -a "df -h"
+EOF PASSWORDLESS AUTHENTICATION
+=====================================================================
 
 modules:
   ping 
