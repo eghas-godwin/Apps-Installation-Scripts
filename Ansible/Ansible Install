@@ -57,6 +57,8 @@ Ansible installation in ubuntu
       https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
   
         vi  /etc/ansible/ansible.cfg
+        # remove comment from line 71 #host_key_checking = False
+        
 
 10)   Create hosts file under /etc/ansible.
         Sample content can found in below git link.
