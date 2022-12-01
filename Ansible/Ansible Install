@@ -102,6 +102,18 @@ ansible docker -m shell -a "df -h"
     ERROR! Attempting to decrypt but no vault secrets found
 ansible docker -m shell -a "df -h" --ask-vault-pass
 
+ssh authentication
+====================
+sudo vi /tmp/awssshkey.pem #paste your ssh key here
+
+sudo vi  /etc/ansible/hosts 
+[WEB]  
+44.210.90.240  ansible_user=ec2-user ansible_ssh_private_key_file=/tmp/awssshkey.pem
+
+ansible web -m ping
+ansible web -m shell -a "df -h"
+ansible web -m shell -a "apt-get update" -b 
+
 ssh/passwordless authentication
 --------------------------------
 ssh-keygen
@@ -144,6 +156,7 @@ cat .ssh/id_rsa.pub #ssh public key
       line: "{{ pubkey }}"
 ===============================================================
 
+# This will create ansible user and ssh/passwordless authentication for multi hosts
 #create ansible user manager all the servers through the server
 # ansible <group/host Name> -m ping -u <userName> --private-key=~/devops.pem
 # ansible-playbook -b ansible-createuser.yml -u <userName> --private-key=~/devops.pem
