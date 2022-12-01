@@ -1,5 +1,6 @@
 
 #1 Ansible installation in ubuntu using python3-pip
+#run as root user when creating an ansible user
 sudo useradd ansible
 sudo passwd ansible
  echo "ansible  ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/ansible
