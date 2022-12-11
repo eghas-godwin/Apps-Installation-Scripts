@@ -1,0 +1,7 @@
+#search for a file and delet the file e.g system log files
+file_path=var/log/syslog
+find $file_path -mtime +10 -type f -delete  #delete 10 days old files and above
+
+find /home/eghas -mtime +10 -type f -ls  #list all files in dir
+
+find /home/eghas   #list all files and dir in path
