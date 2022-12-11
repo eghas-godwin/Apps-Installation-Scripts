@@ -14,3 +14,29 @@ else
         echo "Please run this script and enter another user name"
         echo "Thank You"
 fi
+=====================================================================================================
+
+#this script will pulse to ask confimation question before creating user
+#!bin/bash
+path=/etc/passwd
+echo "Please enter your new user name: "
+read user_name
+state=$(cat $path | grep $user_name)
+if [ $? -eq 1 ]; then
+        echo "your user name $user_name is valid"
+        echo "Do you want to continue? yes/no"
+        read answer
+        if [ $answer==yes ]; then
+                echo "Creating user name $user_name"
+                sudo useradd $user_name -s /bin/bash
+                echo "$user_name created successfully"
+        else
+                echo "user creation cancelled"
+        fi
+else
+        echo "your user name $user_name is invalid"
+        echo "Please run this script and enter another user name"
+        echo "Thank You"
+fi
+~
+
