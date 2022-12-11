@@ -1,0 +1,16 @@
+#!bin/bash
+#if a user_name exist, this script will stop if not it will go ahead to create a new user
+path=/etc/passwd
+echo "Please enter your new user name: "
+read user_name
+state=$(cat $path | grep $user_name)
+if [ $? -eq 1 ]; then  # 1 means does not exixt or not found while 0 means user_name exist.
+        echo "your user name $user_name is valid"
+        echo "Creating user name $user_name"
+        sudo useradd $user_name -s /bin/bash
+        echo "$user_name created successfully"
+else
+        echo "your user name $user_name is invalid"
+        echo "Please run this script and enter another user name"
+        echo "Thank You"
+fi
