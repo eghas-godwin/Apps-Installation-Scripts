@@ -9,6 +9,7 @@ kubectl create ns dev #to create namespace called dev
 
 
 kubectl get deploy -o wide -n dep
+ kubectl scale deploy webapp --replicas=3 -n dev  #increase running pods to 3
 kubectl edit deployment webapp -n dep
 kubectl rollout history deployment webapp -n dep
 kubectl rollout undo deploy -n dep
