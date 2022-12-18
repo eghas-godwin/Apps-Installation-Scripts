@@ -5,6 +5,8 @@ kubectl get pods -o wide -n kube-system
 kubectl get pods --all-namespaces
 kubectl get pods 
 kubectl get nodes
+kubectl create ns dev #to create namespace called dev
+
 
 kubectl get deploy -o wide -n dep
 kubectl edit deployment webapp -n dep
@@ -48,6 +50,8 @@ $ kubectl describe pods <pod-name>
 $ kubectl describe pods/<pod-name>              # Equivalent to previous
 $ kubectl describe pods <rc-name>               # Lists pods created by <rc-name> using common prefix
 
+
+
 # List Services Sorted by Name
 $ kubectl get services --sort-by=.metadata.name
 
@@ -65,3 +69,8 @@ $ kubectl port-forward <podname> <local-and-remote-port>  # Forward port of Pod 
 $ kubectl port-forward <servicename> <port>               # Forward port to service
 $ kubectl exec <pod-name> -- ls /                         # Run command in existing pod (1 container case) 
 $ kubectl exec <pod-name> -c <container-name> -- ls /     # Run command in existing pod (multi-container case) 
+
+If you have already installed kubectl and it is pointing to some other environment, such as minikube or a GKE cluster, 
+ensure you change the context so that kubectl is pointing to docker-desktop:
+kubectl config get-contexts
+kubectl config use-context docker-desktop
