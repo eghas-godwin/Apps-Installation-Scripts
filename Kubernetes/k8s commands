@@ -74,3 +74,6 @@ If you have already installed kubectl and it is pointing to some other environme
 ensure you change the context so that kubectl is pointing to docker-desktop:
 kubectl config get-contexts
 kubectl config use-context docker-desktop
+
+kubeadm version  #To get kubernetes version
+kubectl api-versions #To get kubernetes objects api-version
