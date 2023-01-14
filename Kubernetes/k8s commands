@@ -1,6 +1,10 @@
 #Check the location and credentials that kubectl knows about with this command
 kubectl config view
 
+To acces or fine the deployed kubernetes application name: use the exec command
+to access the pod and go to webapp (if tomcat is used)
+kubectl exec webapp-788d444d98-dvnxj -n dev ls webapps
+
 kubectl get pods -o wide -n kube-system
 kubectl get pods --all-namespaces
 kubectl get pods 
