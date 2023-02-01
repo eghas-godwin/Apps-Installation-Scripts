@@ -1,3 +1,6 @@
+#command to deploy using manifest file
+Kubectl apply -f manifest-file.yml
+
 #Check the location and credentials that kubectl knows about with this command
 kubectl config view
 
