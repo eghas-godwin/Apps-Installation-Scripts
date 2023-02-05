@@ -1,4 +1,4 @@
-verify your ip address is currect (ip addr)
+verify your ip address is currect (ip addr or ip a)
 verify services are running (netstat)
 verify the frewall is not in the way (firewall-cmd --list-all)
 verify remote host is up (ping)
